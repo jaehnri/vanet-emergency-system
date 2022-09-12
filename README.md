@@ -1,1 +1,0 @@
-# vanet-emergency-system

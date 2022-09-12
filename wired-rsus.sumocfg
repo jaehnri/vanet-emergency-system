@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Mon 12 Sep 2022 02:53:08 AM -03 by Eclipse SUMO GUI Version 1.8.0
+-->
+
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/sumoConfiguration.xsd">
+
+    <input>
+        <net-file value="/home/joao/USP/InterSCity/wired-rsus/wired-rsus.net.xml"/>
+        <route-files value="/home/joao/USP/InterSCity/wired-rsus/wired-rsus.rou.xml"/>
+        <additional-files value="/home/joao/USP/InterSCity/wired-rsus/wired-rsus.add.xml"/>
+    </input>
+
+</configuration>
