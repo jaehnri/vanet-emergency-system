@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo-sim.org/xsd/edges_file.xsd">
+-->
+<edges>
+	<edge from="right2left_1"  to="right2left_2"  id="1to2r"  numLanes="3"/>
+	<edge from="right2left_2"  to="right2left_3"  id="outr"  numLanes="3"/>
+
+
+	<edge from="left2right_1" to="left2right_2"   id="1to2l"   numLanes="3"/>
+	<edge from="left2right_2" to="left2right_3"   id="outl"   numLanes="3"/>
+
+</edges>                                          
+

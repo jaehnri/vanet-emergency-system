@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo-sim.org/xsd/nodes_file.xsd">
+-->
+<nodes>
+    <node id="right2left_1" x="1001.0"    y="0.0" />
+    <node id="right2left_2" x="1.0"     y="0.0" />
+    <node id="right2left_3" x="0.0"     y="0.0" />
+
+
+    <node id="left2right_1" x="0.0"    y="20.0" />
+    <node id="left2right_2" x="1000.0" y="20.0" />
+    <node id="left2right_3" x="1001.0" y="20.0" />
+
+</nodes>
+

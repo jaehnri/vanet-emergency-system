@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<!--debug config-->
-
-<launch>
-	<copy file="wired-rsus.net.xml"/>
-	<copy file="wired-rsus.add.xml"/>
-	<copy file="wired-rsus.rou.xml"/>
-	<copy file="wired-rsus.sumocfg" type="config"/>
-</launch>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- generated on Mon 19 Sep 2022 06:40:20 PM -03 by Eclipse SUMO netedit Version 1.8.0
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
+
+    <input>
+        <sumo-net-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
+    </input>
+
+    <output>
+        <output-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
+    </output>
+
+    <processing>
+        <geometry.min-radius.fix.railways value="false"/>
+        <geometry.max-grade.fix value="false"/>
+        <offset.disable-normalization value="true"/>
+        <lefthand value="false"/>
+    </processing>
+
+    <junctions>
+        <no-turnarounds value="true"/>
+        <junctions.corner-detail value="5"/>
+        <junctions.limit-turn-speed value="5.5"/>
+        <rectangular-lane-cut value="false"/>
+    </junctions>
+
+    <pedestrian>
+        <walkingareas value="false"/>
+    </pedestrian>
+
+    <netedit>
+        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.rou.xml"/>
+    </netedit>
+
+    <report>
+        <aggregate-warnings value="5"/>
+    </report>
+
+</configuration>
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="car" length="5.00" maxSpeed="50.00" vClass="passenger" color="green" accel="3.0" decel="7.5" sigma="0.0"/>
+    <vType id="emergency" maxSpeed="70.00" speedFactor="normc(2.00,0.00)" vClass="emergency" color="white" accel="3"/>
+    <route edges="1to2l outl" color="yellow" id="left2right-traffic"/>
+    <route edges="1to2r outr" color="yellow" id="right2left-traffic"/>
+    <flow id="carsl" type="car" begin="0.00" departLane="2" departPos="0.00" route="left2right-traffic" number="1" period="0.00"/>
+</routes>
