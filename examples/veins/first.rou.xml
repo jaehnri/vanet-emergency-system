@@ -4,11 +4,11 @@
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
+        <sumo-net-file value="first.net.xml"/>
     </input>
 
     <output>
-        <output-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
+        <output-file value="first.net.xml"/>
     </output>
 
     <processing>
@@ -30,7 +30,7 @@
     </pedestrian>
 
     <netedit>
-        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.rou.xml"/>
+        <route-files value="first.rou.xml"/>
     </netedit>
 
     <report>
