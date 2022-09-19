@@ -1,1 +1,0 @@
--O3 -DNDEBUG=1 -MMD -MP -MF .d  -fPIC  -Wno-deprecated-register -Wno-unused-function -fno-omit-frame-pointer -DHAVE_SWAPCONTEXT -DWITH_MPI -DXMLPARSER=libxml -DPREFER_QTENV -DWITH_QTENV -DWITH_PARSIM -DWITH_NETBUILDER  -DVEINS_IMPORT -I. -I../veins-veins-5.2/src -Isrc -I/home/joao/USP/InterSCity/omnetpp-5.6.2/include
