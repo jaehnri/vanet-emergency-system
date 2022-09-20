@@ -15,7 +15,7 @@ void TraCIDemo11p::initialize(int stage) {
         accidentmessagetinterval = par("ACCIDENTMESSAGETINTERVAL");
         sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
         //Get back here
-        //scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
+        scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
    }
 }
 void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {

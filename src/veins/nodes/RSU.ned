@@ -19,6 +19,7 @@ module RSU
     submodules:
         appl: <applType> like org.car2x.veins.base.modules.IBaseApplLayer {
             parameters:
+                wireNumber=wiredConnections;
                 @display("p=60,50");
         }
         nic: <nicType> like org.car2x.veins.modules.nic.INic80211p {
@@ -41,5 +42,6 @@ module RSU
         
         for i=0..wiredConnections-1 {
             wired[i].wire <--> rsuConnection[i];
+            wired[i].internalWire <--> appl.wiredConnetion[i];
         }
 }

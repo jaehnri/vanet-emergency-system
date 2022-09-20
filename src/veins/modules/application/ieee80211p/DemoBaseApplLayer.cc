@@ -2,6 +2,15 @@
 
 using namespace veins;
 
+void DemoBaseApplLayer::handleMessage(cMessage *msg)
+{
+    EV << "RECEBIIIII";
+    //sendDelayed(msg, simTime() + exponential(5.0), "wiredConnection$o", 0);
+    //scheduleAt(simTime() + exponential(1.0), msg);
+
+    //send(msg, "wire$o");
+}
+
 void DemoBaseApplLayer::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);

@@ -7,6 +7,7 @@ namespace veins {
 class VEINS_API TraCIDemoRSU11p : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
+
     //kafe code
     int ID;
     int category;//change
@@ -23,6 +24,8 @@ public:
 
 protected:
     void handleSelfMsg(cMessage* msg) override;
+
+
    //void onBSM(DemoSafetyMessage* bsm) override;
         //void onWSM(BaseFrame1609_4* wsm) override;
         //void onWSA(DemoServiceAdvertisment* wsa) override;

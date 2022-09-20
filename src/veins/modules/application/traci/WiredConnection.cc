@@ -23,7 +23,7 @@ Define_Module(WiredConnection);
 void WiredConnection::initialize()
 {
     cMessage *msg = new cMessage("tictocMsg");
-    sendDelayed(msg, simTime() + exponential(5.0), "wire$o");
+    sendDelayed(msg, simTime() + exponential(5.0), "internalWire$o");
 }
 
 void WiredConnection::handleMessage(cMessage *msg)
