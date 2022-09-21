@@ -11,10 +11,13 @@ The SUMO Traffic Control Interface (TraCI) modules for OMNeT++ come with a small
 
 Make sure to execute it from the root folder:
 ```bash
-./bin/veins_launchd -vv -c /usr/local/bin/sumo
+./bin/veins_launchd -vv -c sumo
 ```
 
-If your `sumo` executable is not under `/usr/local/bin`, check your `SUMO_HOME` and replace accordingly:
+Notice that this assumes you can execute `sumo` from anywhere. If this is not the case, check your `SUMO_HOME` variable and replace accordingly, example:
 ```bash
-echo $SUMO_HOME
+$ echo $SUMO_HOME
+/usr/local/bin/sumo
+
+$ ./bin/veins_launchd -vv -c /usr/local/bin/sumo
 ```
