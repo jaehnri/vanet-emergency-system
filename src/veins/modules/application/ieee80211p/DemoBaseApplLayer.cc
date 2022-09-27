@@ -2,15 +2,6 @@
 
 using namespace veins;
 
-void DemoBaseApplLayer::handleMessage(cMessage *msg)
-{
-    EV << "RECEBIIIII";
-    //sendDelayed(msg, simTime() + exponential(5.0), "wiredConnection$o", 0);
-    //scheduleAt(simTime() + exponential(1.0), msg);
-
-    //send(msg, "wire$o");
-}
-
 void DemoBaseApplLayer::initialize(int stage)
 {
     BaseApplLayer::initialize(stage);
@@ -197,6 +188,7 @@ void DemoBaseApplLayer::handleParkingUpdate(cObject* obj)
 
 void DemoBaseApplLayer::handleLowerMsg(cMessage* msg)
 {
+    EV << "handleLowerMsg";
 
     BaseFrame1609_4* wsm = dynamic_cast<BaseFrame1609_4*>(msg);
     ASSERT(wsm);

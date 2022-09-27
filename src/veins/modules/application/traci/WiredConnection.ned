@@ -4,5 +4,6 @@ simple WiredConnection
 {
     gates:
         inout wire;
-        inout internalWire;
+        input internalWireIn;
+        output internalWireOut;
 }

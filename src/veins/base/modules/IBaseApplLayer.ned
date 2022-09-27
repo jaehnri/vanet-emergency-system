@@ -5,13 +5,10 @@ moduleinterface IBaseApplLayer
 {
     parameters:
         int headerLength @unit("bit"); // length of the application message header (in bits)
-        int wireNumber;
     gates:
         input lowerLayerIn; // from network layer
         output lowerLayerOut; // to network layer
         input lowerControlIn; // control from network layer
         output lowerControlOut; // control to network layer
-        inout wiredConnetion[wireNumber];
-        
 }
 

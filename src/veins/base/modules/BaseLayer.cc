@@ -58,6 +58,7 @@ void BaseLayer::initialize(int stage)
         upperControlOut = findGate("upperControlOut");
         lowerControlIn = findGate("lowerControlIn");
         lowerControlOut = findGate("lowerControlOut");
+
     }
 }
 

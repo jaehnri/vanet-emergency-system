@@ -42,7 +42,7 @@ public:
 
 protected:
 
-    virtual void handleMessage(cMessage *msg) override;
+
 
     /** @brief handle messages from below and calls the onWSM, onBSM, and onWSA functions accordingly */
     void handleLowerMsg(cMessage* msg) override;

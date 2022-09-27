@@ -23,14 +23,12 @@ public:
     void finish() override;
 
 protected:
-    void handleSelfMsg(cMessage* msg) override;
-
-
-   //void onBSM(DemoSafetyMessage* bsm) override;
-        //void onWSM(BaseFrame1609_4* wsm) override;
-        //void onWSA(DemoServiceAdvertisment* wsa) override;
-        //void handlePositionUpdate(cObject* obj) override;
-        //kafe code
+        //Additions
+        void handleMessage(cMessage *msg) override;
+        int eruIn;
+        int eruOut;
+        //End of additions
+        void handleSelfMsg(cMessage* msg) override;
         bool sentMessage;
         int firstService;
         int serviceSendNow;

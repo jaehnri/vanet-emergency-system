@@ -8,18 +8,13 @@ module RSU
     parameters:
         string applType; //type of the application layer
         string nicType = default("Nic80211p"); // type of network interface card
-        int wiredConnections = default(1);
     gates:
         input veinsradioIn; // gate for sendDirect  
-        input veinsradioIn2;
-        input RSUIngate[];		//added
-        output RSUOutgate[];     //added
-        inout rsuConnection[wiredConnections];
+        inout eruConnection;
 
     submodules:
-        appl: <applType> like org.car2x.veins.base.modules.IBaseApplLayer {
+        appl:   <applType> like org.car2x.veins.base.modules.IRSUApplLayer {
             parameters:
-                wireNumber=wiredConnections;
                 @display("p=60,50");
         }
         nic: <nicType> like org.car2x.veins.modules.nic.INic80211p {
@@ -30,8 +25,9 @@ module RSU
             parameters:
                 @display("p=170,172;i=block/cogwheel");
         }
-        wired[wiredConnections]: WiredConnection;
-
+        wireNic: WiredConnection {
+            @display("p=154,60");
+        }
     //connections:
     connections allowunconnected:
         nic.upperLayerOut --> appl.lowerLayerIn;
@@ -39,9 +35,8 @@ module RSU
         nic.upperControlOut --> appl.lowerControlIn;
         nic.upperControlIn <-- appl.lowerControlOut;
         veinsradioIn --> nic.radioIn;
-        
-        for i=0..wiredConnections-1 {
-            wired[i].wire <--> rsuConnection[i];
-            wired[i].internalWire <--> appl.wiredConnetion[i];
-        }
+
+		wireNic.wire <--> eruConnection;
+		wireNic.internalWireIn <-- appl.eruOut;
+        wireNic.internalWireOut --> appl.eruIn;
 }

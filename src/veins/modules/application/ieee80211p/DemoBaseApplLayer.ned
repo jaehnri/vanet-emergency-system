@@ -22,13 +22,12 @@ simple DemoBaseApplLayer like IBaseApplLayer
         int wsaLengthBits = default(250bit) @unit(bit);
         double wsaInterval =  default(1s) @unit(s);
         
-        //added
-        int wireNumber = default(1);
+        
 
     gates:
         input lowerLayerIn; // from mac layer
         output lowerLayerOut; // to mac layer
         input lowerControlIn;
         output lowerControlOut;
-        inout wiredConnetion[wireNumber];
+        
 }

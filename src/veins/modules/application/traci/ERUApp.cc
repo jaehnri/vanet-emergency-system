@@ -2,9 +2,58 @@
 #include "veins/modules/application/traci/AccidentMessage_m.h"
 using namespace veins;
 Define_Module(veins::ERUApp);
+void ERUApp::handleMessage(cMessage *msg)
+{
+    if (msg->isSelfMessage()) {
+                handleSelfMsg(msg);
+            }
+            else if (msg->getArrivalGateId() == upperLayerIn) {
+                recordPacket(PassedMessage::INCOMING, PassedMessage::UPPER_DATA, msg);
+                handleUpperMsg(msg);
+            }
+            else if (msg->getArrivalGateId() == upperControlIn) {
+                recordPacket(PassedMessage::INCOMING, PassedMessage::UPPER_CONTROL, msg);
+                handleUpperControl(msg);
+            }
+            else if (msg->getArrivalGateId() == lowerControlIn) {
+                recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_CONTROL, msg);
+                handleLowerControl(msg);
+            }
+            else if (msg->getArrivalGateId() == lowerLayerIn) {
+                recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
+                handleLowerMsg(msg);
+            }
+            else if (msg->getArrivalGateId() == rsuIn) {
+                EV << "Pacote veio pela rsu";
+            }
+            else if (msg->getArrivalGateId() == hospitalIn) {
+                            EV << "Pacote veio pelo hospital";
+            }
+            else if (msg->getArrivalGateId() == -1) {
+                /* Classes extending this class may not use all the gates, f.e.
+                 * BaseApplLayer has no upper gates. In this case all upper gate-
+                 * handles are initialized to -1. When getArrivalGateId() equals -1,
+                 * it would be wrong to forward the message to one of these gates,
+                 * as they actually don't exist, so raise an error instead.
+                 */
+                throw cRuntimeError("No self message and no gateID?? Check configuration.");
+            }
+            else {
+                /* msg->getArrivalGateId() should be valid, but it isn't recognized
+                 * here. This could signal the case that this class is extended
+                 * with extra gates, but handleMessage() isn't overridden to
+                 * check for the new gate(s).
+                 */
+                throw cRuntimeError("Unknown gateID?? Check configuration or override handleMessage().");
+            }
+}
 void ERUApp::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
+    rsuIn = findGate("rsuIn");
+    rsuOut = findGate("rsuOut");
+    hospitalIn = findGate("hospitalIn");
+    hospitalOut = findGate("hospitalOut");
     if (stage == 0)
     {
     }

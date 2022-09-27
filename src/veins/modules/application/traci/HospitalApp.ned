@@ -6,4 +6,7 @@ simple HospitalApp extends DemoBaseApplLayer
     @class(veins::HospitalApp);
     string appName = default("Hospital App!");
     
+    gates:
+        input eruIn;
+        output eruOut;
 }
