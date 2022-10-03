@@ -1,6 +1,6 @@
 package org.car2x.veins.modules.application.traci;
 
-simple WiredConnection
+simple NicEth
 {
     gates:
         inout wire;

@@ -1,7 +1,7 @@
 package org.car2x.veins.nodes;
 import org.car2x.veins.base.modules.*;
 import org.car2x.veins.modules.nic.Nic80211p;
-import org.car2x.veins.modules.application.traci.WiredConnection;
+import org.car2x.veins.modules.application.traci.NicEth;
 module ERURSU 
 {
     parameters:
@@ -26,8 +26,8 @@ module ERURSU
             parameters:
                 @display("p=130,172;i=block/cogwheel");
         }
-		wireNic[2]: WiredConnection {
-            @display("p=154,60");
+		wireNic[2]: NicEth {
+            @display("p=154,60;i=block;i=block/ifcard");
         }
     connections allowunconnected:
         nic.upperLayerOut --> appl.lowerLayerIn;

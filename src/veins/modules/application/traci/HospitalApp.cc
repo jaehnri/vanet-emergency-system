@@ -29,7 +29,8 @@ void HospitalApp::handleMessage(cMessage *msg)
                 handleLowerMsg(msg);
             }
             else if (msg->getArrivalGateId() == eruIn) {
-                EV << "Pacote no pelo fio";
+                recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
+                handleLowerMsg(msg);
             }
             else if (msg->getArrivalGateId() == -1) {
                 /* Classes extending this class may not use all the gates, f.e.

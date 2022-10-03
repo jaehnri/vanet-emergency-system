@@ -73,7 +73,7 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
         //if ((strcmp(findHost()->getFullName(), "node[0]") == 0 && wsm->getA_speed()<1))
         //{
     sendDown(wsm->dup());
-    scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
+    //scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
     cout << "Vehicle sends Accident Report Message(ARM) at: " << simTime() << " with location=" << wsm->getA_location()<<"speed="<<wsm->getA_speed()<< endl;
     //}
     }

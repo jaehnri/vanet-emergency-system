@@ -25,6 +25,7 @@ void ERUApp::handleMessage(cMessage *msg)
             }
             else if (msg->getArrivalGateId() == rsuIn) {
                 EV << "Pacote veio pela rsu";
+                handleLowerMsg(msg);
             }
             else if (msg->getArrivalGateId() == hospitalIn) {
                             EV << "Pacote veio pelo hospital";
@@ -63,6 +64,7 @@ void ERUApp::initialize(int stage)
 }
 void ERUApp::handleSelfMsg(cMessage* msg)
 {
+    EV << "Entrou aqui!";
     DemoBaseApplLayer::handleSelfMsg(msg);
     {
         switch (msg->getKind())
@@ -92,7 +94,8 @@ void ERUApp::onWSM(BaseFrame1609_4* frame)
 {
    std::cout<<"ERU received accident information from RSU"<<endl;
    AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
-   sendDown(wsm->dup()); //change
+   //sendDown(wsm->dup()); //change
+   send(wsm->dup(), "hospitalOut");
    std::cout<<"ERU forward accident information to Hospital"<<endl;
 }
 void ERUApp::finish()

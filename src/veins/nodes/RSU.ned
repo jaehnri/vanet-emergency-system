@@ -1,7 +1,7 @@
 package org.car2x.veins.nodes;
 import org.car2x.veins.base.modules.*;
 import org.car2x.veins.modules.nic.Nic80211p;
-import org.car2x.veins.modules.application.traci.WiredConnection;
+import org.car2x.veins.modules.application.traci.NicEth;
 
 module RSU
 {
@@ -25,8 +25,8 @@ module RSU
             parameters:
                 @display("p=170,172;i=block/cogwheel");
         }
-        wireNic: WiredConnection {
-            @display("p=154,60");
+        wireNic: NicEth {
+            @display("p=154,60;i=block/ifcard");
         }
     //connections:
     connections allowunconnected:
