@@ -15,7 +15,7 @@ void TraCIDemo11p::initialize(int stage) {
         accidentmessagetinterval = par("ACCIDENTMESSAGETINTERVAL");
         sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
         //Get back here
-        //scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
+        scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
    }
 }
 void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
@@ -73,7 +73,7 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
         //if ((strcmp(findHost()->getFullName(), "node[0]") == 0 && wsm->getA_speed()<1))
         //{
     sendDown(wsm->dup());
-    scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
+    //scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
     cout << "Vehicle sends Accident Report Message(ARM) at: " << simTime() << " with location=" << wsm->getA_location()<<"speed="<<wsm->getA_speed()<< endl;
     //}
     }

@@ -188,6 +188,7 @@ void DemoBaseApplLayer::handleParkingUpdate(cObject* obj)
 
 void DemoBaseApplLayer::handleLowerMsg(cMessage* msg)
 {
+    EV << "handleLowerMsg";
 
     BaseFrame1609_4* wsm = dynamic_cast<BaseFrame1609_4*>(msg);
     ASSERT(wsm);
