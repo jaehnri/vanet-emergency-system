@@ -114,14 +114,14 @@ void ERUApp::finish()
 }
 
 
-int ERUApp::getNearestHospital(Coord accidentLocation, HospitalInfo first, HospitalInfo second) {
-    int distanceFromFirst = sqrt(
-            pow(abs(accidentLocation.x - first.x), 2) +
-            pow(abs(accidentLocation.y - first.y), 2));
+int ERUApp::getNearestHospital(Coord accidentLocation, Coord first, Coord second) {
+    double distanceFromFirst = sqrt(
+            pow(std::abs(accidentLocation.x - first.x), 2) +
+            pow(std::abs(accidentLocation.y - first.y), 2));
     EV << "First hospital's distance from accident is " << distanceFromFirst << endl;
-    int distanceFromSecond = sqrt(
-                pow(abs(accidentLocation.x - second.x), 2) +
-                pow(abs(accidentLocation.y - second.y), 2));
+    double distanceFromSecond = sqrt(
+                pow(std::abs(accidentLocation.x - second.x), 2) +
+                pow(std::abs(accidentLocation.y - second.y), 2));
     EV << "Second hospital's distance from accident is " << distanceFromSecond << endl;
 
     if (distanceFromFirst < distanceFromSecond) {
