@@ -1,6 +1,5 @@
 #pragma once
 #include "veins/modules/application/ieee80211p/DemoBaseApplLayer.h"
-#include "veins/modules/application/traci/HospitalInfo.h"
 
 using namespace omnetpp;
 namespace veins {
@@ -9,8 +8,8 @@ class VEINS_API ERUApp : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
     void finish() override;
-    HospitalInfo firstHospital;
-    HospitalInfo secondHospital;
+    Coord firstHospital;
+    Coord secondHospital;
 
 protected:
     //Additions
@@ -29,7 +28,7 @@ protected:
     void handleSelfMsg(cMessage* msg) override;
     //void handlePositionUpdate(cObject* obj) override;
 
-    int getNearestHospital(Coord accidentLocation, HospitalInfo first, HospitalInfo second);
+    int getNearestHospital(Coord accidentLocation, Coord first, Coord second);
 };
 
 } // namespace veins
