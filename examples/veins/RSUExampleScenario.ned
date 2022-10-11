@@ -12,7 +12,7 @@ network RSUExampleScenario extends Scenario
         ERU: ERURSU {
             @display("p=275,261;i=device/server2;is=l");
         }
-        Hospital: RSU{
+        Hospital[2]: RSU{
             @display("p=575,261;i=misc/city_vl;is=l");
         }
         //end
@@ -21,5 +21,7 @@ network RSUExampleScenario extends Scenario
         }
     connections allowunconnected:
         ERU.rsuConnection <--> rsu[0].eruConnection;
-        ERU.hospitalConnection <--> Hospital.eruConnection;
+        
+        ERU.firstHospitalConnection <--> Hospital[0].eruConnection;
+        ERU.secondHospitalConnection <--> Hospital[1].eruConnection;
 }
