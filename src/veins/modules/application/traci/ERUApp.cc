@@ -1,5 +1,7 @@
+#include <cmath>
 #include <veins/modules/application/traci/ERUApp.h>
 #include "veins/modules/application/traci/AccidentMessage_m.h"
+
 using namespace veins;
 Define_Module(veins::ERUApp);
 void ERUApp::handleMessage(cMessage *msg)
@@ -24,11 +26,11 @@ void ERUApp::handleMessage(cMessage *msg)
                 handleLowerMsg(msg);
             }
             else if (msg->getArrivalGateId() == rsuIn) {
-                EV << "Pacote veio pela rsu";
+                EV << "Pacote veio pela rsu" << endl;
                 handleLowerMsg(msg);
             }
-            else if (msg->getArrivalGateId() == hospitalIn) {
-                            EV << "Pacote veio pelo hospital";
+            else if (msg->getArrivalGateId() == firstHospitalIn || msg->getArrivalGateId() == secondHospitalIn) {
+                            EV << "Pacote veio por um dos hospitais" << endl;
             }
             else if (msg->getArrivalGateId() == -1) {
                 /* Classes extending this class may not use all the gates, f.e.
@@ -53,18 +55,20 @@ void ERUApp::initialize(int stage)
     DemoBaseApplLayer::initialize(stage);
     rsuIn = findGate("rsuIn");
     rsuOut = findGate("rsuOut");
-    hospitalIn = findGate("hospitalIn");
-    hospitalOut = findGate("hospitalOut");
-    if (stage == 0)
-    {
-    }
-    else if (stage == 1)
-    {
-    }
+    firstHospitalIn = findGate("firstHospitalIn");
+    firstHospitalOut = findGate("firstHospitalOut");
+    secondHospitalIn = findGate("secondHospitalIn");
+    secondHospitalOut = findGate("secondHospitalOut");
+
+    firstHospital.x = 5000;
+    firstHospital.y = 200;
+    secondHospital.x = 5000;
+    secondHospital.y = 3000;
 }
+
 void ERUApp::handleSelfMsg(cMessage* msg)
 {
-    EV << "Entrou aqui!";
+    EV << "Entrou aqui!" << std::endl;
     DemoBaseApplLayer::handleSelfMsg(msg);
     {
         switch (msg->getKind())
@@ -94,11 +98,35 @@ void ERUApp::onWSM(BaseFrame1609_4* frame)
 {
    std::cout<<"ERU received accident information from RSU"<<endl;
    AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
-   //sendDown(wsm->dup()); //change
-   send(wsm->dup(), "hospitalOut");
-   std::cout<<"ERU forward accident information to Hospital"<<endl;
+
+   int nearestHospital = getNearestHospital(wsm->getA_location(), firstHospital, secondHospital);
+   if (nearestHospital == 1) {
+       send(wsm->dup(), "firstHospitalOut");
+   }
+   if (nearestHospital == 2) {
+       send(wsm->dup(), "secondHospitalOut");
+   }
+   std::cout<<"ERU forward accident information to first Hospital"<<endl;
 }
 void ERUApp::finish()
 {
     DemoBaseApplLayer::finish();
+}
+
+
+int ERUApp::getNearestHospital(Coord accidentLocation, Coord first, Coord second) {
+    double distanceFromFirst = sqrt(
+            pow(std::abs(accidentLocation.x - first.x), 2) +
+            pow(std::abs(accidentLocation.y - first.y), 2));
+    EV << "First hospital's distance from accident is " << distanceFromFirst << endl;
+    double distanceFromSecond = sqrt(
+                pow(std::abs(accidentLocation.x - second.x), 2) +
+                pow(std::abs(accidentLocation.y - second.y), 2));
+    EV << "Second hospital's distance from accident is " << distanceFromSecond << endl;
+
+    if (distanceFromFirst < distanceFromSecond) {
+        return 1;
+    }
+
+    return 2;
 }
