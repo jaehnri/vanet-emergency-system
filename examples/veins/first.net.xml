@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Mon Oct 31 20:28:58 2022 by Eclipse SUMO netconvert Version 1.8.0
+<!-- generated on Mon Oct 31 21:17:21 2022 by Eclipse SUMO netconvert Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <node-files value="nodes.xml"/>
-        <edge-files value="edges.xml"/>
+        <node-files value="./examples/veins/first.nod.xml"/>
+        <edge-files value="./examples/veins/first.edg.xml"/>
     </input>
 
     <output>
-        <output-file value="/home/brunopec/Documents/BCC/IC/vanet-emergency-system/examples/veins/first.net.xml"/>
+        <output-file value="./examples/veins/first.net.xml"/>
     </output>
 
     <report>

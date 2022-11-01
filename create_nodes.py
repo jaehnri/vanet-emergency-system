@@ -1,4 +1,4 @@
-f = open("nodes.xml", 'w')
+f = open("./examples/veins/first.nod.xml", 'w')
 f.write("<nodes>\n")
 for i in range(6):
   for j in range(6):
