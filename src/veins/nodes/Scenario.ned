@@ -41,9 +41,9 @@ network Scenario
         }
         
         
-        //roadsCanvasVisualizer: RoadsCanvasVisualizer {
-        //    @display("p=300,0");
-        //}
+        roadsCanvasVisualizer: RoadsCanvasVisualizer {
+            @display("p=300,0");
+        }
         node[0]: Car {
         }
 		
