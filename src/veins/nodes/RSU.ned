@@ -10,7 +10,7 @@ module RSU
     gates:
         input veinsradioIn; // gate for sendDirect
     submodules:
-        appl:   <applType> like org.car2x.veins.base.modules.IRSUApplLayer {
+        appl: <applType> like org.car2x.veins.base.modules.IBaseApplLayer {
             parameters:
                 @display("p=60,50");
         }

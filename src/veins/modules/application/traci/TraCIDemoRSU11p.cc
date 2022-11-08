@@ -54,8 +54,6 @@ void TraCIDemoRSU11p::handleMessage(cMessage *msg)
 void TraCIDemoRSU11p::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
-    eruIn = findGate("eruIn");
-    eruOut = findGate("eruOut");
     if (stage == 0)
     {
         //mobility= TraCIMobilityAccess().get(getParentModule());

@@ -23,11 +23,6 @@ public:
     void finish() override;
 
 protected:
-        //Additions
-        void handleMessage(cMessage *msg) override;
-        int eruIn;
-        int eruOut;
-        //End of additions
         void handleSelfMsg(cMessage* msg) override;
         bool sentMessage;
         int firstService;
