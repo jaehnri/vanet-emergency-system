@@ -31,19 +31,10 @@ public:
 
     enum DemoApplMessageKinds {
         SEND_BEACON_EVT,
-        SEND_WSA_EVT,
-        //kafe code starts
-                SEND_ACCIDENT_EVT,
-                SEND_QUERY_EVT,
-                SEND_RESPONSE_EVT,
-                SEND_EXPIRY_EVT
-       //code ends
+        SEND_WSA_EVT
     };
 
 protected:
-
-
-
     /** @brief handle messages from below and calls the onWSM, onBSM, and onWSA functions accordingly */
     void handleLowerMsg(cMessage* msg) override;
 
@@ -106,10 +97,6 @@ protected:
      *
      * @param msg the message to be checked and tracked
      */
-
-
-    //virtual void sendDirect(cMessage *msg, cModule *mod, const char *gateName);
-
     virtual void checkAndTrackPacket(cMessage* msg);
 
 protected:
@@ -158,12 +145,6 @@ protected:
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;
     cMessage* sendWSAEvt;
-    //kafe code starts
-        cMessage* sendAcdntEvt;
-        cMessage* sendQueryEvt;
-        cMessage* sendResponseEvt;
-        cMessage* sendExpEvt;
-    //end code
 };
 
 } // namespace veins
