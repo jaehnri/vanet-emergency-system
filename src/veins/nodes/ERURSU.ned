@@ -10,7 +10,8 @@ module ERURSU
     gates:
         input veinsradioIn; // gate for sendDirect  
         inout rsuConnection;
-        inout hospitalConnection;
+        inout firstHospitalConnection;
+        inout secondHospitalConnection;
     submodules:
         appl: <applType> like org.car2x.veins.base.modules.IERUApplLayer {
             parameters:
@@ -26,7 +27,7 @@ module ERURSU
             parameters:
                 @display("p=130,172;i=block/cogwheel");
         }
-		wireNic[2]: NicEth {
+		wireNic[3]: NicEth {
             @display("p=154,60;i=block;i=block/ifcard");
         }
     connections allowunconnected:
@@ -40,9 +41,13 @@ module ERURSU
 		wireNic[0].internalWireIn <-- appl.rsuOut;
         wireNic[0].internalWireOut --> appl.rsuIn;
         
-        wireNic[1].wire <--> hospitalConnection;
-		wireNic[1].internalWireIn <-- appl.hospitalOut;
-        wireNic[1].internalWireOut --> appl.hospitalIn;
+        wireNic[1].wire <--> firstHospitalConnection;
+		wireNic[1].internalWireIn <-- appl.firstHospitalOut;
+        wireNic[1].internalWireOut --> appl.firstHospitalIn;
+        
+        wireNic[2].wire <--> secondHospitalConnection;
+		wireNic[2].internalWireIn <-- appl.secondHospitalOut;
+        wireNic[2].internalWireOut --> appl.secondHospitalIn;
         
         
 }

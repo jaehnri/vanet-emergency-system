@@ -5,8 +5,11 @@ moduleinterface IERUApplLayer extends IBaseApplLayer
 {
     
     gates:
-        input hospitalIn;
-        output hospitalOut;
+        input firstHospitalIn;
+        output firstHospitalOut;
+        input secondHospitalIn;
+        output secondHospitalOut;
+        
         input rsuIn;
         output rsuOut;
 }

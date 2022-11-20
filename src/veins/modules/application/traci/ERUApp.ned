@@ -7,8 +7,11 @@ simple ERUApp extends DemoBaseApplLayer like IERUApplLayer
     string appName = default("My first Veins App!");
     
     gates:
-        input hospitalIn;
-        output hospitalOut;
+        input firstHospitalIn;
+        output firstHospitalOut;
+        input secondHospitalIn;
+        output secondHospitalOut;
+
         input rsuIn;
         output rsuOut;
 }
