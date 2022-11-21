@@ -48,9 +48,8 @@ void TraCIDemo11p::handleSelfMsg(cMessage *msg)
     }
     case SEND_ACCIDENT_EVT:
     {
-              sendAccidentMessage();
-
-         break;
+        sendAccidentMessage();
+        break;
     }
     default:
     {
