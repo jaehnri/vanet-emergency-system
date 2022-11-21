@@ -6,7 +6,7 @@ network RSUExampleScenario extends Scenario
 {
     parameters:
         int numRsu = default(0);
-        @display("bgb=1009,457");
+        @display("bgb=1600,1500");
     submodules:
         //start
         ERU: ERURSU {
