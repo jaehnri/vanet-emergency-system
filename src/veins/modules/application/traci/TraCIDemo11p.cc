@@ -13,9 +13,13 @@ void TraCIDemo11p::initialize(int stage) {
         lastDroveAt = simTime();
         currentSubscribedServiceId = -1;
         accidentmessagetinterval = par("ACCIDENTMESSAGETINTERVAL");
-        sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
-        //Get back here
-        scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
+
+        int nodeId = getParentModule()->getIndex();
+        cout << "Car ID: " << nodeId << endl;
+        if (nodeId == 0) {
+            sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
+            scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
+        }
    }
 }
 void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
@@ -63,7 +67,7 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
     //if (mobility->getSpeed()<1)
     //if(traciVehicle->getAcceleration()<1)
 
-    EV << "Seding accident message";
+    EV << "Sending accident message";
 
     AccidentMessage *wsm = new AccidentMessage();
     populateWSM(wsm);
