@@ -1,16 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo-sim.org/xsd/nodes_file.xsd">
--->
 <nodes>
-    <node id="right2left_1" x="1001.0"    y="0.0" />
-    <node id="right2left_2" x="1.0"     y="0.0" />
-    <node id="right2left_3" x="0.0"     y="0.0" />
-
-
-    <node id="left2right_1" x="0.0"    y="20.0" />
-    <node id="left2right_2" x="1000.0" y="20.0" />
-    <node id="left2right_3" x="1001.0" y="20.0" />
-
+	<node id="n00" x="0.0" y="0.0" />
+	<node id="n01" x="0.0" y="300.0" />
+	<node id="n02" x="0.0" y="600.0" />
+	<node id="n03" x="0.0" y="900.0" />
+	<node id="n04" x="0.0" y="1200.0" />
+	<node id="n05" x="0.0" y="1500.0" />
+	<node id="n10" x="300.0" y="0.0" />
+	<node id="n11" x="300.0" y="300.0" />
+	<node id="n12" x="300.0" y="600.0" />
+	<node id="n13" x="300.0" y="900.0" />
+	<node id="n14" x="300.0" y="1200.0" />
+	<node id="n15" x="300.0" y="1500.0" />
+	<node id="n20" x="600.0" y="0.0" />
+	<node id="n21" x="600.0" y="300.0" />
+	<node id="n22" x="600.0" y="600.0" />
+	<node id="n23" x="600.0" y="900.0" />
+	<node id="n24" x="600.0" y="1200.0" />
+	<node id="n25" x="600.0" y="1500.0" />
+	<node id="n30" x="900.0" y="0.0" />
+	<node id="n31" x="900.0" y="300.0" />
+	<node id="n32" x="900.0" y="600.0" />
+	<node id="n33" x="900.0" y="900.0" type="traffic_light" />
+	<node id="n34" x="900.0" y="1200.0" />
+	<node id="n35" x="900.0" y="1500.0" />
+	<node id="n40" x="1200.0" y="0.0" />
+	<node id="n41" x="1200.0" y="300.0" />
+	<node id="n42" x="1200.0" y="600.0" />
+	<node id="n43" x="1200.0" y="900.0" />
+	<node id="n44" x="1200.0" y="1200.0" />
+	<node id="n45" x="1200.0" y="1500.0" />
+	<node id="n50" x="1500.0" y="0.0" />
+	<node id="n51" x="1500.0" y="300.0" />
+	<node id="n52" x="1500.0" y="600.0" />
+	<node id="n53" x="1500.0" y="900.0" />
+	<node id="n54" x="1500.0" y="1200.0" />
+	<node id="n55" x="1500.0" y="1500.0" />
 </nodes>
-
