@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Mon Nov 21 15:32:09 2022 by Eclipse SUMO netedit Version 1.8.0
+<!-- generated on Mon 21 Nov 2022 06:59:18 PM -03 by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="./examples/veins/first.net.xml"/>
+        <sumo-net-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
     </input>
 
     <output>
-        <output-file value="./examples/veins/first.net.xml"/>
+        <output-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
     </output>
 
     <processing>
@@ -30,7 +30,7 @@
     </pedestrian>
 
     <netedit>
-        <route-files value="/home/brunopec/Downloads/Omnet-5.6.2/vanet-emergency-system/examples/veins/first.rou.xml"/>
+        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.rou.xml"/>
     </netedit>
 
     <report>
@@ -41,6 +41,8 @@
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <vType id="emergency" maxSpeed="70.00" speedFactor="normc(2.00,0.00)" vClass="emergency" color="white" accel="3"/>
     <route edges="e23-33 e33-43" color="yellow" id="route_0"/>
+    <route edges="e43-33 e33-23 e23-13" color="yellow" id="route_1"/>
     <vehicle id="vehicle_0" depart="0.00" route="route_0"/>
 </routes>
