@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Thu Nov  3 19:56:55 2022 by Eclipse SUMO netedit Version 1.8.0
+<!-- generated on Mon Nov 21 15:32:09 2022 by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -30,7 +30,7 @@
     </pedestrian>
 
     <netedit>
-        <route-files value="/home/brunopec/Documents/BCC/IC/vanet-emergency-system/examples/veins/first.rou.xml"/>
+        <route-files value="/home/brunopec/Downloads/Omnet-5.6.2/vanet-emergency-system/examples/veins/first.rou.xml"/>
     </netedit>
 
     <report>
