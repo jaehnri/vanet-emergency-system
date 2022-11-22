@@ -25,21 +25,19 @@ void TrafficLightRSU::initialize(int stage)
     }
 }
 
-void TrafficLightRSU::onWSM(BaseFrame1609_4* frame)
-{
+void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
+        EV << "TLRSU received  OPEN message!" << endl;
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
-        if (!initialized)
-        {
+        if (!initialized) {
             setTraCI();
             associateTrafficlight();
 
             initialized = true;
         }
 
-        if (!associatedTlId.empty())
-        {
+        if (!associatedTlId.empty()) {
             TraCICommandInterface::Trafficlight associatedTl = traci->trafficlight(associatedTlId);
 
             long messageTreeId = wsm->getTreeId();
@@ -57,7 +55,7 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame)
                 if (simTime()-lastUpdate >= reinitializationDelay)
                 {
                     lastUpdate = simTime();
-                    memorizedAmuId = "none";
+                    memorizedAmuId = -1;
                     highestPriority = 0;
                     associatedTl.reinitialize(); // Check if the traffic light has to be set back to its normal state
                 }
@@ -70,11 +68,11 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame)
                     if (associatedTl.isControlling(amuRoadId))
                     {
                         int wsmPriority = wsm->getPriority();
-                        std::string wsmAmuId = wsm->getAmuId();
+                        int wsmAmuId = wsm->getAmuId();
 
                         if (wsmPriority == highestPriority)
                         {
-                            if (wsmAmuId == memorizedAmuId || memorizedAmuId == "none")
+                            if (wsmAmuId == memorizedAmuId || memorizedAmuId == -1)
                             {
                                 associatedTl.prioritizeRoad(amuRoadId);
                                 update(wsmAmuId, wsmPriority);
@@ -99,22 +97,25 @@ void TrafficLightRSU::setTraCI()
     traci = manager->getCommandInterface();
 }
 
-void TrafficLightRSU::associateTrafficlight()
-{
-    for (std::string junctionId: traci->getJunctionIds())
-    {
+void TrafficLightRSU::associateTrafficlight() {
+
+    for (std::string junctionId: traci->getJunctionIds()) {
+
         TraCICommandInterface::Junction junction = traci->junction(junctionId);
         double distanceFromJunction = traci->getDistance(curPosition, junction.getPosition(), false);
 
-        if (distanceFromJunction < 10)
-        {
-            for (std::string tlId: traci->getTrafficlightIds())
-                if (junctionId == tlId) associatedTlId = tlId;
+        if (distanceFromJunction < 40) {
+            for (std::string tlId: traci->getTrafficlightIds()) {
+                if (junctionId == tlId) {
+                    EV << "TL associated with junctionId" << tlId << endl;
+                    associatedTlId = tlId;
+                }
+            }
         }
     }
 }
 
-void TrafficLightRSU::update(std::string memorizedAmuId, int highestPriority)
+void TrafficLightRSU::update(int memorizedAmuId, int highestPriority)
 {
     this->memorizedAmuId = memorizedAmuId;
     this->highestPriority = highestPriority;

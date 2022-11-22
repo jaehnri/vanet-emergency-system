@@ -20,7 +20,7 @@ protected:
     std::string associatedTlId; /* ID of the traffic light associated to the RSU */
     long lastMessageTreeId;     /* Tree ID of the last message received */
     simtime_t lastUpdate;       /* Time of the last update */
-    std::string memorizedAmuId; /* Ambulance ID memorized by the RSU */
+    int memorizedAmuId; /* Ambulance ID memorized by the RSU */
     int highestPriority;        /* Highest priority recorded */
 
 protected:
@@ -42,7 +42,7 @@ private:
      * @param memorizedAmuId Ambulance ID memorized
      * @param highestPriority Highest priority recorded
      */
-    void update(std::string memorizedAmuId, int highestPriority);
+    void update(int memorizedAmuId, int highestPriority);
 };
 
 } // namespace Veins
