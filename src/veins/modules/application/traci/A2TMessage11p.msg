@@ -23,15 +23,9 @@ message A2TMessage11p extends BaseFrame1609_4 {
     int serial = 0;
     
     // -------------------------- A2T --------------------------
-	bool isFromAmbulance;	// Is the message sent by an ambulance ?
-	string amuId;			// ID of the ambulance
 	int priority; 			// Priority of the message
+	int amuId;			    // ID of the ambulance
+	bool isFromAmbulance;	// Is the message sent by an ambulance
 	string amuLaneId; 		// Lane ID of the ambulance
-	double amuX;			// x position of the ambulance
-	double amuY;			// y position of the ambulance
-	double senderX;			// x position of the sender
-	double senderY;			// y position of the sender
-	int maxHop;				// Maximum number of hops of the message (lifespan)
-	int hopCount; 			// Number of hops of the message
 	// -------------------------- A2T --------------------------
 }
