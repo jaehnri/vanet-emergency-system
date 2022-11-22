@@ -6,5 +6,6 @@ simple TraCIDemo11p extends DemoBaseApplLayer
 {
     @class(veins::TraCIDemo11p);
     @display("i=block/app2");
-    double ACCIDENTMESSAGETINTERVAL =default (1s) @unit(s);   //added 
+    double ACCIDENTMESSAGETINTERVAL =default (1s) @unit(s);   //added
+    double broadcastInterval = default (4s) @unit(s);
 }

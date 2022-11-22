@@ -27,7 +27,6 @@ void TrafficLightRSU::initialize(int stage)
 
 void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
-        EV << "TLRSU received  OPEN message!" << endl;
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
         if (!initialized) {

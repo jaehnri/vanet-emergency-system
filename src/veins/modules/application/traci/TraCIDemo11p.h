@@ -16,6 +16,7 @@ protected:
     cMessage* sendAcdntEvt; //added
     TraCIMobility* mobility;
 
+    simtime_t broadcastInterval; /* Interval between broadcasts */
     simtime_t lastBroadcastAt;   /* [AMU] Simulation time of the last message broadcasted */
     int priority;                /* Priority of the vehicle */
 protected:

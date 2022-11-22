@@ -15,6 +15,7 @@ void TraCIDemo11p::initialize(int stage) {
         currentSubscribedServiceId = -1;
 
         accidentmessagetinterval = par("ACCIDENTMESSAGETINTERVAL");
+        broadcastInterval = par("broadcastInterval");
 
         lastBroadcastAt = simTime();
         priority = 0;
@@ -70,7 +71,7 @@ void TraCIDemo11p::handlePositionUpdate(cObject* obj) {
 
     // The ambulance has nodeId == 1
     int nodeId = getParentModule()->getIndex();
-    if (nodeId == 1) {
+    if (nodeId == 1 && simTime() - lastBroadcastAt >= broadcastInterval) {
         A2TMessage11p* wsm = new A2TMessage11p();
         populateWSM(wsm);
 
