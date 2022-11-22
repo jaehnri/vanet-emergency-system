@@ -24,6 +24,6 @@ simple TrafficLightRSU extends DemoBaseApplLayer
         int reinitializationDelay; // Time after which the RSU resets if it has not been updated (in seconds)
         // ---------------------- Simulation parameters ----------------------
         
-    	@class(Veins::TrafficLightRSU);
+    	@class(veins::TrafficLightRSU);
     	@display("i=block/app2");
 }

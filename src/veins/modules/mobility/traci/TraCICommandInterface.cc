@@ -1039,7 +1039,7 @@ bool TraCICommandInterface::Trafficlight::isControlling(std::string roadId)
 
     for (std::string laneId: getControlledLanes()) // For each controlled lane
     {
-        std::string correspondingRoadId = traci->lane(laneId).getRoadId(); // ID of the road to wich the lane belongs
+        std::string correspondingRoadId = traci->lane(laneId).getRoadId(); // ID of the road to which the lane belongs
         if (correspondingRoadId == roadId) controlsRoad = true; // Does the TL control the road ?
     }
 

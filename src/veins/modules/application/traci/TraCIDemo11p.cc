@@ -73,8 +73,8 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
     wsm->setA_description("Emergency situation, an accident happens at the location 0.0. 0.0");
     wsm->setA_location(curPosition);
     wsm->setA_speed(traciVehicle->getSpeed());
-        //if ((strcmp(findHost()->getFullName(), "node[0]") == 0 && wsm->getA_speed()<1))
-        //{
+    wsm->setKind(SEND_ACCIDENT_EVT);
+
     sendDown(wsm->dup());
     //scheduleAt(simTime() + accidentmessagetinterval, sendAcdntEvt);
     cout << "Vehicle sends Accident Report Message(ARM) at: " << simTime() << " with location=" << wsm->getA_location()<<"speed="<<wsm->getA_speed()<< endl;

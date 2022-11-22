@@ -32,12 +32,11 @@ public:
     enum DemoApplMessageKinds {
         SEND_BEACON_EVT,
         SEND_WSA_EVT,
-        //kafe code starts
-                SEND_ACCIDENT_EVT,
-                SEND_QUERY_EVT,
-                SEND_RESPONSE_EVT,
-                SEND_EXPIRY_EVT
-       //code ends
+        SEND_ACCIDENT_EVT,
+        SEND_QUERY_EVT,
+        SEND_RESPONSE_EVT,
+        SEND_EXPIRY_EVT,
+        SEND_OPEN_TRAFFIC_LIGHT_EVT
     };
 
 protected:
