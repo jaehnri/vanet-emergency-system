@@ -368,6 +368,11 @@ public:
         void setState(std::string state);
         void setPhaseDuration(simtime_t duration); /**< set remaining duration of current phase */
         void setProgramDefinition(TraCITrafficLightProgram::Logic program, int32_t programNr);
+        // -------------------------- A2T --------------------------
+        void prioritizeRoad(std::string roadId); // Set a new state for the traffic light to prioritize a specific road
+        void reinitialize(); // Reinitialize the traffic light back to its normal program after a manual state modification
+        bool isControlling(std::string roadId); // Check if the traffic light controls the given road
+        // -------------------------- A2T --------------------------
 
     protected:
         TraCICommandInterface* traci;

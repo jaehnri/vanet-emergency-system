@@ -14,10 +14,15 @@ protected:
     int currentSubscribedServiceId;
     double accidentmessagetinterval; //added
     cMessage* sendAcdntEvt; //added
-    void sendAccidentMessage();    //added
     TraCIMobility* mobility;
+
+    simtime_t broadcastInterval; /* Interval between broadcasts */
+    simtime_t lastBroadcastAt;   /* [AMU] Simulation time of the last message broadcasted */
+    int priority;                /* Priority of the vehicle */
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
     void handleSelfMsg(cMessage* msg) override;
+    void handlePositionUpdate(cObject* obj) override;
+    void sendAccidentMessage();    //added
   };
 }// namespace veins

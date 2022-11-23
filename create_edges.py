@@ -1,4 +1,4 @@
-f = open("edges.xml", 'w')
+f = open("./examples/veins/first.edg.xml", 'w')
 f.write("<edges>\n")
 horz = [-1, 0, 0, 1]
 vert = [0, 1, -1, 0]

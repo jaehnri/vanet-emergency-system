@@ -103,8 +103,8 @@ void HospitalApp::setTraCI()
 {
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
     traci = manager->getCommandInterface();
-    traci->addVehicle("testvehicle", "emergency", "right2left-traffic");
+    traci->addVehicle("testvehicle", "emergency", "route_1");
     traci->DEPART_POSITION_RANDOM;
-    std::cout<<"Hospital Send out an ambulance to the accident location"<<endl;
+    std::cout<<"Hospital sent out an ambulance to the accident location"<<endl;
 }
 

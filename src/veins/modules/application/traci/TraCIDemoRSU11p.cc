@@ -72,8 +72,8 @@ void TraCIDemoRSU11p::initialize(int stage)
 void TraCIDemoRSU11p::handleSelfMsg(cMessage* msg)
 {
     EV << "HandleSelfMsg()";
-    //DemoBaseApplLayer::handleSelfMsg(msg);
-    {
+    {    //DemoBaseApplLayer::handleSelfMsg(msg);
+
         switch (msg->getKind())
         {
         case SEND_BEACON_EVT:
@@ -106,16 +106,15 @@ void TraCIDemoRSU11p::handleSelfMsg(cMessage* msg)
         }
     }
 }
-void TraCIDemoRSU11p::onWSM(BaseFrame1609_4* frame)
-{
-   std::cout<<"RSU received accident information from vehicle"<<endl;
-   AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
-   //sendDelayedDown(wsm->dup(), 2 + uniform(0.01, 0.2)); //change
-   send(wsm->dup(), "eruOut");
-   std::cout<<"RSU forward accident information to Emergency Center"<<endl;
-   //traci->addVehicle("testvehicle", "car", "left2right-traffic");
+void TraCIDemoRSU11p::onWSM(BaseFrame1609_4* frame) {
+    if (frame->getKind() == SEND_ACCIDENT_EVT) {
+        std::cout<<"RSU received accident information from vehicle"<<endl;
 
+        AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
+        send(wsm->dup(), "eruOut");
 
+        std::cout<<"RSU forward accident information to Emergency Center"<<endl;
+    }
 }
 
 

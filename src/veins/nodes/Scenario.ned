@@ -38,12 +38,10 @@ network Scenario
         manager: TraCIScenarioManagerLaunchd {
             parameters:
                 @display("p=512,128");
+        }                
+        roadsCanvasVisualizer: RoadsCanvasVisualizer {
+            @display("p=300,0");
         }
-        
-        
-        //roadsCanvasVisualizer: RoadsCanvasVisualizer {
-        //    @display("p=300,0");
-        //}
         node[0]: Car {
         }
 		

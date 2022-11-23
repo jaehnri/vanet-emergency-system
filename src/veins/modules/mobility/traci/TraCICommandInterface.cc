@@ -993,6 +993,60 @@ void TraCICommandInterface::Trafficlight::setProgramDefinition(TraCITrafficLight
     ASSERT(obuf.eof());
 }
 
+// -------------------------- A2T --------------------------
+/* Set a new state for the traffic light to prioritize a specific road
+ * @param roadId ID of the road to prioritize
+ */
+void TraCICommandInterface::Trafficlight::prioritizeRoad(std::string roadId) {
+    /* Index of the currently examined link
+     * See documentation at https://sumo.dlr.de/wiki/Simulation/Traffic_Lights#Signal_state_definitions
+     */
+    int linkIndex = 0; // SUMO indexation of the links
+
+    /* New traffic light state
+     * See documentation at https://sumo.dlr.de/wiki/Simulation/Traffic_Lights#Signal_state_definitions
+     */
+    std::string state = "";
+
+    for (auto const& linksOfSignal: getControlledLinks()) // For each link of the traffic light
+    {
+        for (auto const& link: linksOfSignal)
+        {
+            // ID of the road to which the link's incoming lane belongs
+            std::string incomingRoadId = traci->lane(link.incoming).getRoadId();
+
+            /* Definition of a new state for the traffic light:
+             * - Set to green light if the link's incoming lane belongs to the prioritized road
+             * - Else set to red light
+             */
+            if (roadId == incomingRoadId) state += "G";
+            else state += "r";
+        }
+        linkIndex++;
+    }
+    setState(state.c_str()); // Setting the new state of the traffic light
+}
+
+/* Reinitializes the traffic light back to its normal program after a manual state modification */
+void TraCICommandInterface::Trafficlight::reinitialize() {
+    if (getCurrentProgramID() == "online") // Is the current state manually set ?
+        setProgram("0"); // The traffic light returns to its normal cycle
+}
+
+bool TraCICommandInterface::Trafficlight::isControlling(std::string roadId)
+{
+    bool controlsRoad = false;
+
+    for (std::string laneId: getControlledLanes()) // For each controlled lane
+    {
+        std::string correspondingRoadId = traci->lane(laneId).getRoadId(); // ID of the road to which the lane belongs
+        if (correspondingRoadId == roadId) controlsRoad = true; // Does the TL control the road ?
+    }
+
+    return controlsRoad;
+}
+// -------------------------- A2T --------------------------
+
 void TraCICommandInterface::Trafficlight::setProgram(std::string program)
 {
     TraCIBuffer buf = connection->query(CMD_SET_TL_VARIABLE, TraCIBuffer() << static_cast<uint8_t>(TL_PROGRAM) << trafficLightId << static_cast<uint8_t>(TYPE_STRING) << program);
