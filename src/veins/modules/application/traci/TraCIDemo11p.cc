@@ -20,8 +20,22 @@ void TraCIDemo11p::initialize(int stage) {
         lastBroadcastAt = simTime();
         priority = 0;
 
-        int nodeId = getParentModule()->getIndex();
-        if (nodeId == 0) {
+        // Set SUMO and VEINS Ids
+        veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
+        mobility = TraCIMobilityAccess().get(getParentModule());
+        traci = manager->getCommandInterface();
+        vehicleSumoId = mobility->getExternalId();
+        vehicleVeinsId = getParentModule()->getIndex();
+        vehicleSumoTypeId = traci->vehicle(vehicleSumoId).getVType();
+
+
+
+        std::cout << "vehicle sumo id " << vehicleSumoId << endl;
+        std::cout << "vehicle sumo type id " << vehicleSumoTypeId << endl;
+        //vehicleSumoTypeId = traci->getVType();
+
+
+        if (!isAmbulance()) {
             sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
@@ -69,14 +83,12 @@ void TraCIDemo11p::handleSelfMsg(cMessage *msg)
 void TraCIDemo11p::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
 
-    // The ambulance has nodeId == 1
-    int nodeId = getParentModule()->getIndex();
-    if (nodeId == 1 && simTime() - lastBroadcastAt >= broadcastInterval) {
+    if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
         A2TMessage11p* wsm = new A2TMessage11p();
         populateWSM(wsm);
 
         wsm->setIsFromAmbulance(true);
-        wsm->setAmuId(nodeId);
+        wsm->setAmuId(vehicleVeinsId);
         wsm->setAmuLaneId(traciVehicle->getLaneId().c_str());
         wsm->setPriority(priority);
         wsm->setKind(SEND_OPEN_TRAFFIC_LIGHT_EVT);
@@ -104,4 +116,8 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
 void TraCIDemo11p::finish()
 {
     TraCIDemo11p::finish();
+}
+
+bool TraCIDemo11p::isAmbulance() {
+    return vehicleSumoTypeId == "emergency";
 }

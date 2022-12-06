@@ -8,7 +8,15 @@ class VEINS_API TraCIDemo11p : public DemoBaseApplLayer
 public:
     void initialize(int stage) override;
     void finish() override;
+    bool isAmbulance();
 protected:
+    //Vehicle identification
+    int vehicleVeinsId;
+    std::string vehicleSumoId;
+    std::string vehicleSumoTypeId;
+
+    TraCICommandInterface* traci;
+
     simtime_t lastDroveAt;
     bool sentMessage;
     int currentSubscribedServiceId;

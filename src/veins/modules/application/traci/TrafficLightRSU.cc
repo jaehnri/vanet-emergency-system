@@ -61,6 +61,7 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
 
                 if (wsm->isFromAmbulance())
                 {
+                    std::cout << "Sent from ambulance";
                     std::string amuLaneId = wsm->getAmuLaneId();
                     std::string amuRoadId = traci->lane(amuLaneId).getRoadId();
 
