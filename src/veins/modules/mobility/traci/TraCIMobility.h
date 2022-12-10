@@ -153,6 +153,12 @@ public:
         if (!vehicleCommandInterface) vehicleCommandInterface = new TraCICommandInterface::Vehicle(getCommandInterface()->vehicle(getExternalId()));
         return vehicleCommandInterface;
     }
+    // added to get traffic light interface
+    virtual TraCICommandInterface::Trafficlight* getTlCommandInterface(std::string tlId) const
+    {
+        if (!tlCommandInterface) tlCommandInterface = new TraCICommandInterface::Trafficlight(getCommandInterface()->trafficlight(tlId));
+                return tlCommandInterface;
+    }
 
     /**
      * Returns the speed of the host (likely 0 if setHostSpeed==false)
@@ -191,6 +197,7 @@ protected:
     mutable TraCIScenarioManager* manager;
     mutable TraCICommandInterface* commandInterface;
     mutable TraCICommandInterface::Vehicle* vehicleCommandInterface;
+    mutable TraCICommandInterface::Trafficlight* tlCommandInterface;
     double last_speed;
 
     bool isParking;

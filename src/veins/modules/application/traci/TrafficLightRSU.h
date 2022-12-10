@@ -23,6 +23,9 @@ protected:
     int memorizedAmuId; /* Ambulance ID memorized by the RSU */
     int highestPriority;        /* Highest priority recorded */
 
+    //
+    TraCICommandInterface::Trafficlight* traciTl;
+
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
 

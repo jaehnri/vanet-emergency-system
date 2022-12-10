@@ -22,11 +22,11 @@ void TraCIDemo11p::initialize(int stage) {
 
         // Set SUMO and VEINS Ids
         veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
+        // For some reason mobility doesnt work
         mobility = TraCIMobilityAccess().get(getParentModule());
-        traci = manager->getCommandInterface();
         vehicleSumoId = mobility->getExternalId();
         vehicleVeinsId = getParentModule()->getIndex();
-        vehicleSumoTypeId = traci->vehicle(vehicleSumoId).getVType();
+        vehicleSumoTypeId = traciVehicle->getVType();
 
 
 

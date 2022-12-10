@@ -15,8 +15,6 @@ protected:
     std::string vehicleSumoId;
     std::string vehicleSumoTypeId;
 
-    TraCICommandInterface* traci;
-
     simtime_t lastDroveAt;
     bool sentMessage;
     int currentSubscribedServiceId;

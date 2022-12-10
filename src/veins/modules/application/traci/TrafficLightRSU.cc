@@ -85,6 +85,9 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
                         }
                     }
                 }
+                else {
+                    std::cout << "Sent from otherTL";
+                }
             }
             else EV << "<!> This message has already been processed." << endl;
         }
@@ -109,6 +112,7 @@ void TrafficLightRSU::associateTrafficlight() {
                 if (junctionId == tlId) {
                     EV << "TL associated with junctionId" << tlId << endl;
                     associatedTlId = tlId;
+                    traciTl = mobility->getTlCommandInterface(associatedTlId);
                 }
             }
         }
