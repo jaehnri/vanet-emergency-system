@@ -156,8 +156,10 @@ public:
     // added to get traffic light interface
     virtual TraCICommandInterface::Trafficlight* getTlCommandInterface(std::string tlId) const
     {
+
+        std::cout << "Chegou em getTlCommandInterface" << endl;
         if (!tlCommandInterface) tlCommandInterface = new TraCICommandInterface::Trafficlight(getCommandInterface()->trafficlight(tlId));
-                return tlCommandInterface;
+        return tlCommandInterface;
     }
 
     /**

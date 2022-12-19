@@ -9,6 +9,7 @@ Define_Module(veins::TrafficLightRSU);
 void TrafficLightRSU::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
+    //mobility = TraCIMobilityAccess().get(getParentModule());
     if (stage == 0)
     {
         // ---------------------- Simulation parameters ----------------------
@@ -61,9 +62,12 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
 
                 if (wsm->isFromAmbulance())
                 {
-                    std::cout << "Sent from ambulance";
+                    std::cout << "Sent from ambulance" << endl;
                     std::string amuLaneId = wsm->getAmuLaneId();
                     std::string amuRoadId = traci->lane(amuLaneId).getRoadId();
+                    std::cout << "amuRoadId: " << amuRoadId << endl;
+                    openTraffic(amuRoadId);
+
 
                     if (associatedTl.isControlling(amuRoadId))
                     {
@@ -94,6 +98,17 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
     }
 }
 
+void TrafficLightRSU::openTraffic(std::string amuRoadId) {
+    for (std::string id: traci->getTrafficlightIds()) {
+            TraCICommandInterface::Trafficlight tl = traci->trafficlight(id);
+            std::cout << "analysing tl: " <<  id << endl;
+            if(tl.isControlling(amuRoadId)) {
+                std::cout << id << " is controlling" << endl;
+                tl.prioritizeRoad(amuRoadId);
+            }
+    }
+}
+
 void TrafficLightRSU::setTraCI()
 {
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
@@ -102,9 +117,11 @@ void TrafficLightRSU::setTraCI()
 
 void TrafficLightRSU::associateTrafficlight() {
 
+
     for (std::string junctionId: traci->getJunctionIds()) {
 
         TraCICommandInterface::Junction junction = traci->junction(junctionId);
+
         double distanceFromJunction = traci->getDistance(curPosition, junction.getPosition(), false);
 
         if (distanceFromJunction < 40) {
@@ -112,11 +129,24 @@ void TrafficLightRSU::associateTrafficlight() {
                 if (junctionId == tlId) {
                     EV << "TL associated with junctionId" << tlId << endl;
                     associatedTlId = tlId;
-                    traciTl = mobility->getTlCommandInterface(associatedTlId);
+
+
+                    //TraCIMobility* mobility;
+                    //TraCICommandInterface* traci;
+
+                    //mobility = TraCIMobilityAccess().get(getParentModule());
+                    //traci = mobility->getCommandInterface();
+                    //traci->trafficlight("n33");
+                    //mobility = TraCIMobilityAccess().get(getParentModule());
+                    //mobility->getExternalId();
+                    //traciTl = mobility->getTlCommandInterface(associatedTlId);
                 }
             }
+            //mobility->getExternalId();
+
         }
     }
+    TraCICommandInterface::Trafficlight tl = traci->trafficlight(associatedTlId);
 }
 
 void TrafficLightRSU::update(int memorizedAmuId, int highestPriority)

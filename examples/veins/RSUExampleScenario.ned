@@ -21,7 +21,7 @@ network RSUExampleScenario extends Scenario
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 
-        tls[1]: TLRSU {
+        tls[2]: TLRSU {
             @display("i=veins/node/trafficlight;p=325.42624,127.89125");
         }
     connections allowunconnected:

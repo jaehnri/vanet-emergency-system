@@ -46,6 +46,13 @@ private:
      * @param highestPriority Highest priority recorded
      */
     void update(int memorizedAmuId, int highestPriority);
+
+    /**
+     * Open other traffic lights that
+     * control lane in the Ambulance's
+     * route
+     */
+    void openTraffic(std::string amuLaneId);
 };
 
 } // namespace Veins
