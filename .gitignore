@@ -1,3 +1,6 @@
+### Language Settings ###
+.settings/**
+
 .idea
 
 src/Makefile
