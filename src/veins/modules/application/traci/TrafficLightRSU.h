@@ -23,6 +23,9 @@ protected:
     int memorizedAmuId; /* Ambulance ID memorized by the RSU */
     int highestPriority;        /* Highest priority recorded */
 
+    //
+    TraCICommandInterface::Trafficlight* traciTl;
+
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
 
@@ -43,6 +46,13 @@ private:
      * @param highestPriority Highest priority recorded
      */
     void update(int memorizedAmuId, int highestPriority);
+
+    /**
+     * Open other traffic lights that
+     * control lane in the Ambulance's
+     * route
+     */
+    void openTraffic(std::string amuLaneId);
 };
 
 } // namespace Veins
