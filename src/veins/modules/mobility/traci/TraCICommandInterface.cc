@@ -464,6 +464,20 @@ double TraCICommandInterface::Vehicle::getAccumulatedWaitingTime() const
     return traci->genericGetDouble(CMD_GET_VEHICLE_VARIABLE, nodeId, VAR_WAITING_TIME_ACCUMULATED, RESPONSE_GET_VEHICLE_VARIABLE);
 }
 
+// -------------------------- A2T --------------------------
+void TraCICommandInterface::Vehicle::changeLane(int lane, int duration)
+{
+    uint8_t commandType = TYPE_COMPOUND;
+    int nParameters = 2;
+    uint8_t variableId = CMD_CHANGELANE;
+    TraCIBuffer buf = traci->connection.query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << commandType << nParameters << static_cast<uint8_t>(TYPE_BYTE) << (uint8_t) lane << static_cast<uint8_t>(TYPE_INTEGER) << duration);
+//    TraCIBuffer buf = traci->connection->query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << commandType << nParameters << static_cast<uint8_t>(TYPE_BYTE) << (uint8_t) lane << static_cast<uint8_t>(TYPE_DOUBLE) << duration);
+    ASSERT(buf.eof());
+}
+
+// -------------------------- A2T --------------------------
+
+
 uint8_t TraCICommandInterface::Vehicle::getStopState() const
 {
     const auto apiVersion = traci->versionConfig.version;

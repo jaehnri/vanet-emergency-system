@@ -35,14 +35,21 @@ void TraCIDemo11p::initialize(int stage) {
         //vehicleSumoTypeId = traci->getVType();
 
 
-        if (!isAmbulance()) {
+        // Only the "accident car" should send the accident message
+        if (!isAmbulance() && !isNormalVehicle()) {
             sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
    }
 }
 void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
+    if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
+        A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
+        if (wsm->isFromAmbulance()) {
+            traciVehicle->changeLane(0, 5000);
+        }
+    }
 }
 
 void TraCIDemo11p::handleSelfMsg(cMessage *msg)
@@ -120,4 +127,8 @@ void TraCIDemo11p::finish()
 
 bool TraCIDemo11p::isAmbulance() {
     return vehicleSumoTypeId == "emergency";
+}
+
+bool TraCIDemo11p::isNormalVehicle() {
+    return vehicleSumoTypeId == "normal";
 }

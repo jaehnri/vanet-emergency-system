@@ -9,6 +9,7 @@ public:
     void initialize(int stage) override;
     void finish() override;
     bool isAmbulance();
+    bool isNormalVehicle();
 protected:
     //Vehicle identification
     int vehicleVeinsId;
