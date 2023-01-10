@@ -251,6 +251,11 @@ public:
         double getAccumulatedWaitingTime() const;
 
         /**
+         * Changes the lane of a given vehicle.
+         */
+        void changeLane(int lane, int duration);
+
+        /**
          * Get the vehicle's stop state which carries information about whether it is currently stopping and in which context.
          *
          * @return the stop state which is a bit field defined as follows:
