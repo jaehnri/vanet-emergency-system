@@ -465,13 +465,17 @@ double TraCICommandInterface::Vehicle::getAccumulatedWaitingTime() const
 }
 
 // -------------------------- A2T --------------------------
-void TraCICommandInterface::Vehicle::changeLane(int lane, int duration)
+void TraCICommandInterface::Vehicle::changeLane(uint8_t laneIndex, double duration)
 {
-    uint8_t commandType = TYPE_COMPOUND;
-    int nParameters = 2;
     uint8_t variableId = CMD_CHANGELANE;
-    TraCIBuffer buf = traci->connection.query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << commandType << nParameters << static_cast<uint8_t>(TYPE_BYTE) << (uint8_t) lane << static_cast<uint8_t>(TYPE_INTEGER) << duration);
-//    TraCIBuffer buf = traci->connection->query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << commandType << nParameters << static_cast<uint8_t>(TYPE_BYTE) << (uint8_t) lane << static_cast<uint8_t>(TYPE_DOUBLE) << duration);
+    uint8_t variableType = TYPE_COMPOUND;
+    int32_t count = 2;
+    uint8_t laneIndexType = TYPE_BYTE;
+    // laneIndex
+    uint8_t durationType = TYPE_DOUBLE;
+    // duration
+
+    TraCIBuffer buf = connection->query(CMD_SET_VEHICLE_VARIABLE, TraCIBuffer() << variableId << nodeId << variableType << count << laneIndexType << laneIndex << durationType << duration);
     ASSERT(buf.eof());
 }
 

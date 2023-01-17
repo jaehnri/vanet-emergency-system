@@ -47,7 +47,7 @@ void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
         if (wsm->isFromAmbulance()) {
-            traciVehicle->changeLane(0, 5000);
+            traciVehicle->changeLane(0, 5.0);
         }
     }
 }
