@@ -1,13 +1,13 @@
-#include <veins/modules/application/traci/HospitalApp.h>
-#include "veins/modules/application/traci/AccidentMessage_m.h"
-#include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
+#include <veins/modules/application/traci/HospitalAppl.h>
+#include "veins/modules/messages/AccidentMessage_m.h"
+#include "veins/modules/messages/TraCIDemo11pMessage_m.h"
 
-//#include "veins/modules/application/traci/TraCIDemo11p.h"
+//#include "veins/modules/application/traci/VehicleAppl.h"
 //#include "veins/modules/mobility/traci/TraCIMobility.h"
 #include <string.h>
 using namespace veins;
-Define_Module(veins::HospitalApp);
-void HospitalApp::handleMessage(cMessage *msg)
+Define_Module(veins::HospitalAppl);
+void HospitalAppl::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
                 handleSelfMsg(msg);
@@ -50,7 +50,7 @@ void HospitalApp::handleMessage(cMessage *msg)
                 throw cRuntimeError("Unknown gateID?? Check configuration or override handleMessage().");
             }
 }
-void HospitalApp::initialize(int stage)
+void HospitalAppl::initialize(int stage)
 {
 
     DemoBaseApplLayer::initialize(stage);
@@ -65,12 +65,12 @@ void HospitalApp::initialize(int stage)
     }
 }
 
-void HospitalApp::onWSM(BaseFrame1609_4* frame)
+void HospitalAppl::onWSM(BaseFrame1609_4* frame)
 {
    std::cout<<"Hospital received accident information from ERU"<<endl;
    setTraCI();
 }
-void HospitalApp::handleSelfMsg(cMessage *msg) {
+void HospitalAppl::handleSelfMsg(cMessage *msg) {
     switch (msg->getKind()) {
     case SEND_BEACON_EVT: {
         DemoSafetyMessage *bsm = new DemoSafetyMessage();
@@ -95,11 +95,11 @@ void HospitalApp::handleSelfMsg(cMessage *msg) {
     }
     }
 }
-void HospitalApp::finish()
+void HospitalAppl::finish()
 {
     DemoBaseApplLayer::finish();
 }
-void HospitalApp::setTraCI()
+void HospitalAppl::setTraCI()
 {
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
     traci = manager->getCommandInterface();

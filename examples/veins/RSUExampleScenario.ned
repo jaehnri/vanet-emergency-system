@@ -2,7 +2,7 @@ import org.car2x.veins.nodes.RSU;
 import org.car2x.veins.nodes.ERURSU; //added
 import org.car2x.veins.nodes.TLRSU; //added
 import org.car2x.veins.nodes.Scenario;
-import org.car2x.veins.modules.application.traci.TraCIDemoRSU11p; //added
+import org.car2x.veins.modules.application.traci.RSUAppl; //added
 network RSUExampleScenario extends Scenario
 {
     parameters:

@@ -1,10 +1,10 @@
 #include <cmath>
-#include <veins/modules/application/traci/ERUApp.h>
-#include "veins/modules/application/traci/AccidentMessage_m.h"
+#include <veins/modules/application/traci/ERUAppl.h>
+#include "veins/modules/messages/AccidentMessage_m.h"
 
 using namespace veins;
-Define_Module(veins::ERUApp);
-void ERUApp::handleMessage(cMessage *msg)
+Define_Module(veins::ERUAppl);
+void ERUAppl::handleMessage(cMessage *msg)
 {
     if (msg->isSelfMessage()) {
                 handleSelfMsg(msg);
@@ -50,7 +50,7 @@ void ERUApp::handleMessage(cMessage *msg)
                 throw cRuntimeError("Unknown gateID?? Check configuration or override handleMessage().");
             }
 }
-void ERUApp::initialize(int stage)
+void ERUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
     rsuIn = findGate("rsuIn");
@@ -66,7 +66,7 @@ void ERUApp::initialize(int stage)
     secondHospital.y = 1500;
 }
 
-void ERUApp::handleSelfMsg(cMessage* msg)
+void ERUAppl::handleSelfMsg(cMessage* msg)
 {
     DemoBaseApplLayer::handleSelfMsg(msg);
     {
@@ -93,7 +93,7 @@ void ERUApp::handleSelfMsg(cMessage* msg)
         }
     }
 }
-void ERUApp::onWSM(BaseFrame1609_4* frame)
+void ERUAppl::onWSM(BaseFrame1609_4* frame)
 {
    std::cout<<"ERU received accident information from RSU"<<endl;
 
@@ -110,13 +110,13 @@ void ERUApp::onWSM(BaseFrame1609_4* frame)
        std::cout<<"ERU forward accident information to first Hospital"<<endl;
    }
 }
-void ERUApp::finish()
+void ERUAppl::finish()
 {
     DemoBaseApplLayer::finish();
 }
 
 
-int ERUApp::getNearestHospital(Coord accidentLocation, Coord first, Coord second) {
+int ERUAppl::getNearestHospital(Coord accidentLocation, Coord first, Coord second) {
     double distanceFromFirst = sqrt(
             pow(std::abs(accidentLocation.x - first.x), 2) +
             pow(std::abs(accidentLocation.y - first.y), 2));

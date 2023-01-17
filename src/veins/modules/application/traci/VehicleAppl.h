@@ -3,7 +3,7 @@
 using namespace omnetpp;
 namespace veins
 {
-class VEINS_API TraCIDemo11p : public DemoBaseApplLayer
+class VEINS_API VehicleAppl : public DemoBaseApplLayer
 {
 public:
     void initialize(int stage) override;

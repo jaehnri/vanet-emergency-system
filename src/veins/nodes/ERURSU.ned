@@ -1,7 +1,7 @@
 package org.car2x.veins.nodes;
 import org.car2x.veins.base.modules.*;
 import org.car2x.veins.modules.nic.Nic80211p;
-import org.car2x.veins.modules.application.traci.NicEth;
+import org.car2x.veins.modules.ethernet.NicEth;
 module ERURSU 
 {
     parameters:

@@ -17,13 +17,13 @@ package org.car2x.veins.modules.application.traci;
 
 import org.car2x.veins.modules.application.ieee80211p.DemoBaseApplLayer;
 
-simple TrafficLightRSU extends DemoBaseApplLayer
+simple TLAppl extends DemoBaseApplLayer
 {
     parameters:
         // ---------------------- Simulation parameters ----------------------
         int reinitializationDelay; // Time after which the RSU resets if it has not been updated (in seconds)
         // ---------------------- Simulation parameters ----------------------
         
-    	@class(veins::TrafficLightRSU);
+    	@class(veins::TLAppl);
     	@display("i=block/app2");
 }

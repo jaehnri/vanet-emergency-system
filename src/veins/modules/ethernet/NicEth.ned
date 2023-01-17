@@ -1,4 +1,4 @@
-package org.car2x.veins.modules.application.traci;
+package org.car2x.veins.modules.ethernet;
 
 simple NicEth
 {

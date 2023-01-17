@@ -1,12 +1,12 @@
-#include <veins/modules/application/traci/TrafficLightRSU.h>
-#include <veins/modules/application/traci/A2TMessage11p_m.h>
+#include <veins/modules/application/traci/TLAppl.h>
+#include <veins/modules/messages/A2TMessage11p_m.h>
 
 
 using namespace veins;
 
-Define_Module(veins::TrafficLightRSU);
+Define_Module(veins::TLAppl);
 
-void TrafficLightRSU::initialize(int stage)
+void TLAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
     //mobility = TraCIMobilityAccess().get(getParentModule());
@@ -26,7 +26,7 @@ void TrafficLightRSU::initialize(int stage)
     }
 }
 
-void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
+void TLAppl::onWSM(BaseFrame1609_4* frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
@@ -98,7 +98,7 @@ void TrafficLightRSU::onWSM(BaseFrame1609_4* frame) {
     }
 }
 
-void TrafficLightRSU::openTraffic(std::string amuRoadId) {
+void TLAppl::openTraffic(std::string amuRoadId) {
     for (std::string id: traci->getTrafficlightIds()) {
             TraCICommandInterface::Trafficlight tl = traci->trafficlight(id);
             std::cout << "analysing tl: " <<  id << endl;
@@ -109,13 +109,13 @@ void TrafficLightRSU::openTraffic(std::string amuRoadId) {
     }
 }
 
-void TrafficLightRSU::setTraCI()
+void TLAppl::setTraCI()
 {
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
     traci = manager->getCommandInterface();
 }
 
-void TrafficLightRSU::associateTrafficlight() {
+void TLAppl::associateTrafficlight() {
 
 
     for (std::string junctionId: traci->getJunctionIds()) {
@@ -149,7 +149,7 @@ void TrafficLightRSU::associateTrafficlight() {
     TraCICommandInterface::Trafficlight tl = traci->trafficlight(associatedTlId);
 }
 
-void TrafficLightRSU::update(int memorizedAmuId, int highestPriority)
+void TLAppl::update(int memorizedAmuId, int highestPriority)
 {
     this->memorizedAmuId = memorizedAmuId;
     this->highestPriority = highestPriority;
