@@ -2,6 +2,8 @@
 #include "veins/modules/messages/TraCIDemo11pMessage_m.h"
 #include "veins/modules/messages/AccidentMessage_m.h"
 #include "veins/modules/mobility/traci/TraCIMobility.h"
+#include <veins/modules/messages/A2TMessage11p_m.h>
+#include <veins/veins.h>
 
 
 
@@ -112,8 +114,11 @@ void RSUAppl::onWSM(BaseFrame1609_4* frame) {
 
         AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
         send(wsm->dup(), "eruOut");
-
         std::cout<<"RSU forward accident information to Emergency Center"<<endl;
+    }
+    if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
+            A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
+            sendDown(wsm->dup());
     }
 }
 

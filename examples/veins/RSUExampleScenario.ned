@@ -17,7 +17,7 @@ network RSUExampleScenario extends Scenario
             @display("p=575,261;i=misc/city_vl;is=l");
         }
         //end
-        rsu[1]: RSU {
+        rsu[3]: RSU {
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 
