@@ -59,6 +59,10 @@ void DemoBaseApplLayer::initialize(int stage)
         receivedBSMs = 0;
         receivedWSAs = 0;
         receivedWSMs = 0;
+
+        accidentStartTime = 0;
+        ambulanceArrivalTime = 0;
+        totalTime = 0;
     }
     else if (stage == 1) {
 
@@ -243,6 +247,10 @@ void DemoBaseApplLayer::finish()
 
     recordScalar("generatedWSAs", generatedWSAs);
     recordScalar("receivedWSAs", receivedWSAs);
+
+    recordScalar("accidentStartTime", accidentStartTime);
+    recordScalar("ambulanceArrivalTime", ambulanceArrivalTime);
+    recordScalar("totalTime", totalTime);
 }
 
 DemoBaseApplLayer::~DemoBaseApplLayer()

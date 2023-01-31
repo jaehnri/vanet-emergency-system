@@ -38,6 +38,7 @@ void VehicleAppl::initialize(int stage) {
         // Only the "accident car" should send the accident message
         if (!isAmbulance() && !isNormalVehicle()) {
             sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
+            DemoBaseApplLayer::accidentStartTime = simTime().dbl();
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
    }
@@ -90,6 +91,7 @@ void VehicleAppl::handleSelfMsg(cMessage *msg)
 void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
 
+    // checks if ambulance should send another OPEN_TRAFFIC_LIGHT message
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
         A2TMessage11p* wsm = new A2TMessage11p();
         populateWSM(wsm);
@@ -102,6 +104,11 @@ void VehicleAppl::handlePositionUpdate(cObject* obj) {
 
         lastBroadcastAt = simTime();
         sendDown(wsm->dup());
+    }
+
+    // checks if ambulance arrived at the destination
+    if (isAmbulance()) {
+
     }
 }
 

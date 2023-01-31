@@ -154,6 +154,10 @@ protected:
     uint32_t receivedWSAs;
     uint32_t receivedBSMs;
 
+    double accidentStartTime;
+    double ambulanceArrivalTime;
+    double totalTime;
+
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;
     cMessage* sendWSAEvt;
