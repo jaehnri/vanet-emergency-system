@@ -40,8 +40,15 @@ void NicEth::handleMessage(cMessage *msg)
     if(msg->getArrivalGateId() == wireIn) {
         send(msg->dup(), "internalWireOut");
     } else if (msg->getArrivalGateId() == internalWireIn) {
-        EV << "Recebi por internal wire";
-        send(msg->dup(), "wire$o");
+
+        cGate *outGate = gate(wireOut);
+        if(outGate->isPathOK()) {
+            send(msg->dup(), "wire$o");
+        }
+        else {
+            EV << "\nDiscarted beacon\n";
+        }
+
     } else if (msg->getArrivalGateId() == -1) {
         /* Classes extending this class may not use all the gates, f.e.
          * BaseApplLayer has no upper gates. In this case all upper gate-

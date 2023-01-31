@@ -4,7 +4,7 @@
 
 namespace veins {
 
-class VEINS_API TraCIDemoRSU11p : public DemoBaseApplLayer {
+class VEINS_API RSUAppl : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
 

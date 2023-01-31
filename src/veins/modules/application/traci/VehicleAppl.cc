@@ -1,13 +1,13 @@
-#include "veins/modules/application/traci/TraCIDemo11p.h"
-#include "veins/modules/application/traci/AccidentMessage_m.h"
-#include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
-#include <veins/modules/application/traci/A2TMessage11p_m.h>
+#include "veins/modules/application/traci/VehicleAppl.h"
+#include "veins/modules/messages/AccidentMessage_m.h"
+#include "veins/modules/messages/TraCIDemo11pMessage_m.h"
+#include <veins/modules/messages/A2TMessage11p_m.h>
 #include <string.h>
 using namespace veins;
 using namespace std;
-Define_Module(veins::TraCIDemo11p);
+Define_Module(veins::VehicleAppl);
 
-void TraCIDemo11p::initialize(int stage) {
+void VehicleAppl::initialize(int stage) {
     DemoBaseApplLayer::initialize(stage);
     if (stage == 0) {
         sentMessage = false;
@@ -42,17 +42,17 @@ void TraCIDemo11p::initialize(int stage) {
         }
    }
 }
-void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
+void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
         if (wsm->isFromAmbulance()) {
-            traciVehicle->changeLane(0, 5000);
+            traciVehicle->changeLane(0, 5.0);
         }
     }
 }
 
-void TraCIDemo11p::handleSelfMsg(cMessage *msg)
+void VehicleAppl::handleSelfMsg(cMessage *msg)
 {
     switch (msg->getKind())
     {
@@ -87,7 +87,7 @@ void TraCIDemo11p::handleSelfMsg(cMessage *msg)
     }
 }
 
-void TraCIDemo11p::handlePositionUpdate(cObject* obj) {
+void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
 
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
@@ -105,7 +105,7 @@ void TraCIDemo11p::handlePositionUpdate(cObject* obj) {
     }
 }
 
-void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm fields and send it.
+void VehicleAppl::sendAccidentMessage() // assigned array indexed values to wsm fields and send it.
 {
     EV << "Sending accident message";
 
@@ -120,15 +120,15 @@ void TraCIDemo11p::sendAccidentMessage() // assigned array indexed values to wsm
     cout << "Vehicle sends Accident Report Message(ARM) at: " << simTime() << " with location=" << wsm->getA_location()<<"speed="<<wsm->getA_speed()<< endl;
 }
 
-void TraCIDemo11p::finish()
+void VehicleAppl::finish()
 {
-    TraCIDemo11p::finish();
+    VehicleAppl::finish();
 }
 
-bool TraCIDemo11p::isAmbulance() {
+bool VehicleAppl::isAmbulance() {
     return vehicleSumoTypeId == "emergency";
 }
 
-bool TraCIDemo11p::isNormalVehicle() {
+bool VehicleAppl::isNormalVehicle() {
     return vehicleSumoTypeId == "normal";
 }

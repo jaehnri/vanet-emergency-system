@@ -3,7 +3,7 @@
 
 namespace veins {
 
-class VEINS_API TrafficLightRSU : public DemoBaseApplLayer {
+class VEINS_API TLAppl : public DemoBaseApplLayer {
 
 public:
     void initialize(int stage) override;

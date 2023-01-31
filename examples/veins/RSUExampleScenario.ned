@@ -2,7 +2,7 @@ import org.car2x.veins.nodes.RSU;
 import org.car2x.veins.nodes.ERURSU; //added
 import org.car2x.veins.nodes.TLRSU; //added
 import org.car2x.veins.nodes.Scenario;
-import org.car2x.veins.modules.application.traci.TraCIDemoRSU11p; //added
+import org.car2x.veins.modules.application.traci.RSUAppl; //added
 network RSUExampleScenario extends Scenario
 {
     parameters:
@@ -17,7 +17,7 @@ network RSUExampleScenario extends Scenario
             @display("p=575,261;i=misc/city_vl;is=l");
         }
         //end
-        rsu[1]: RSU {
+        rsu[3]: RSU {
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 

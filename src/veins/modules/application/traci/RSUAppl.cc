@@ -1,13 +1,15 @@
-#include "veins/modules/application/traci/TraCIDemoRSU11p.h"
-#include "veins/modules/application/traci/TraCIDemo11pMessage_m.h"
-#include "veins/modules/application/traci/AccidentMessage_m.h"
+#include "veins/modules/application/traci/RSUAppl.h"
+#include "veins/modules/messages/TraCIDemo11pMessage_m.h"
+#include "veins/modules/messages/AccidentMessage_m.h"
 #include "veins/modules/mobility/traci/TraCIMobility.h"
+#include <veins/modules/messages/A2TMessage11p_m.h>
+#include <veins/veins.h>
 
 
 
 using namespace veins;
-Define_Module(veins::TraCIDemoRSU11p);
-void TraCIDemoRSU11p::handleMessage(cMessage *msg)
+Define_Module(veins::RSUAppl);
+void RSUAppl::handleMessage(cMessage *msg)
 {
 
     if (msg->isSelfMessage()) {
@@ -51,7 +53,7 @@ void TraCIDemoRSU11p::handleMessage(cMessage *msg)
         }
 }
 
-void TraCIDemoRSU11p::initialize(int stage)
+void RSUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
     eruIn = findGate("eruIn");
@@ -69,7 +71,7 @@ void TraCIDemoRSU11p::initialize(int stage)
 
     }
 }
-void TraCIDemoRSU11p::handleSelfMsg(cMessage* msg)
+void RSUAppl::handleSelfMsg(cMessage* msg)
 {
     EV << "HandleSelfMsg()";
     {    //DemoBaseApplLayer::handleSelfMsg(msg);
@@ -106,20 +108,23 @@ void TraCIDemoRSU11p::handleSelfMsg(cMessage* msg)
         }
     }
 }
-void TraCIDemoRSU11p::onWSM(BaseFrame1609_4* frame) {
+void RSUAppl::onWSM(BaseFrame1609_4* frame) {
     if (frame->getKind() == SEND_ACCIDENT_EVT) {
         std::cout<<"RSU received accident information from vehicle"<<endl;
 
         AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
         send(wsm->dup(), "eruOut");
-
         std::cout<<"RSU forward accident information to Emergency Center"<<endl;
+    }
+    if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
+            A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
+            sendDown(wsm->dup());
     }
 }
 
 
 
-void TraCIDemoRSU11p::finish()
+void RSUAppl::finish()
 {
     DemoBaseApplLayer::finish();
 }

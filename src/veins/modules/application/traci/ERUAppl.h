@@ -4,7 +4,7 @@
 using namespace omnetpp;
 namespace veins {
 
-class VEINS_API ERUApp : public DemoBaseApplLayer {
+class VEINS_API ERUAppl : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
     void finish() override;

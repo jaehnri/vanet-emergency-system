@@ -253,7 +253,7 @@ public:
         /**
          * Changes the lane of a given vehicle.
          */
-        void changeLane(int lane, int duration);
+        void changeLane(uint8_t laneIndex, double duration);
 
         /**
          * Get the vehicle's stop state which carries information about whether it is currently stopping and in which context.

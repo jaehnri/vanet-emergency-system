@@ -7,7 +7,7 @@ using namespace omnetpp;
 //using veins::TraCIMobility;
 namespace veins {
 
-class VEINS_API HospitalApp : public DemoBaseApplLayer {
+class VEINS_API HospitalAppl : public DemoBaseApplLayer {
 public:
     void initialize(int stage) override;
     void finish() override;
