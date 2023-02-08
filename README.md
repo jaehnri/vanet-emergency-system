@@ -35,6 +35,9 @@ Notice that this assumes you can execute `sumo` from anywhere. If this is not th
 $ echo $SUMO_HOME
 /usr/local/bin/sumo
 
+# if you have sumo path set
+$ ./bin/veins_launchd -vv -c sumo
+# otherwise
 $ ./bin/veins_launchd -vv -c /usr/local/bin/sumo
 ```
 
