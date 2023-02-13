@@ -31,7 +31,7 @@ void RSUAppl::handleMessage(cMessage *msg)
             recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
             handleLowerMsg(msg);
         }
-        else if (msg->getArrivalGateId() == eruIn) {
+        else if (strcmp(msg->getArrivalGate()->getName(), "eruGates$i") == 0) {
             EV << "Pacote veio pelo fio";
         }
         else if (msg->getArrivalGateId() == -1) {
@@ -56,20 +56,6 @@ void RSUAppl::handleMessage(cMessage *msg)
 void RSUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
-    eruIn = findGate("eruIn");
-    eruOut = findGate("eruOut");
-    if (stage == 0)
-    {
-        //mobility= TraCIMobilityAccess().get(getParentModule());
-        //traci=mobility->getCommandInterface();
-        //traciVehicle=mobility->getVehicleCommandInterface();
-
-
-     }
-    else if (stage == 1)
-    {
-
-    }
 }
 void RSUAppl::handleSelfMsg(cMessage* msg)
 {
@@ -113,7 +99,7 @@ void RSUAppl::onWSM(BaseFrame1609_4* frame) {
         std::cout<<"RSU received accident information from vehicle"<<endl;
 
         AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
-        send(wsm->dup(), "eruOut");
+        send(wsm->dup(), "eruGates$o", 0);
         std::cout<<"RSU forward accident information to Emergency Center"<<endl;
     }
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {

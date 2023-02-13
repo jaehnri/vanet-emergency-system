@@ -15,8 +15,6 @@ public:
 protected:
     //Additions
     void handleMessage(cMessage *msg) override;
-    int eruIn;
-    int eruOut;
       //TraCICommandInterface* traci;
    void onWSM(BaseFrame1609_4* wsm) override;
     cMessage* sendAcdntEvt; //added

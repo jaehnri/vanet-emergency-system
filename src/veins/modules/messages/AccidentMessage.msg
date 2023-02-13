@@ -9,4 +9,5 @@ packet AccidentMessage extends BaseFrame1609_4
 	string a_description;	
 	Coord a_location;
 	double a_speed;
+	int gateIndex;
 }

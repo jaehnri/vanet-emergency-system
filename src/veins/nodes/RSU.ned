@@ -8,13 +8,21 @@ module RSU
     parameters:
         string applType; //type of the application layer
         string nicType = default("Nic80211p"); // type of network interface card
+        int rsuCount = default(0);
+        int eruCount = default(0);
+        int hospitalCount = default(0);
     gates:
         input veinsradioIn; // gate for sendDirect  
-        inout eruConnection;
+        inout rsuGates[rsuCount];
+        inout eruGates[eruCount];
+        inout hospitalGates[hospitalCount];
 
     submodules:
         appl:   <applType> like org.car2x.veins.base.modules.IRSUApplLayer {
             parameters:
+                rsuCount = rsuCount;
+                eruCount = eruCount;
+                hospitalCount = hospitalCount;
                 @display("p=60,50");
         }
         nic: <nicType> like org.car2x.veins.modules.nic.INic80211p {
@@ -26,7 +34,9 @@ module RSU
                 @display("p=170,172;i=block/cogwheel");
         }
         wireNic: NicEth {
-            @display("p=154,60;i=block/ifcard");
+            parameters:
+                wireCount = rsuCount + eruCount + hospitalCount;
+            	@display("p=154,60;i=block/ifcard");
         }
     //connections:
     connections allowunconnected:
@@ -35,8 +45,19 @@ module RSU
         nic.upperControlOut --> appl.lowerControlIn;
         nic.upperControlIn <-- appl.lowerControlOut;
         veinsradioIn --> nic.radioIn;
+        
+        for i = 0..(rsuCount - 1) {
+            appl.rsuGates[i] <--> wireNic.internalWires[i];
+            rsuGates[i] <--> wireNic.wires[i];
+        }
 
-		wireNic.wire <--> eruConnection;
-		wireNic.internalWireIn <-- appl.eruOut;
-        wireNic.internalWireOut --> appl.eruIn;
+        for i = 0..(eruCount - 1) {
+            appl.eruGates[i] <--> wireNic.internalWires[i + rsuCount];
+            eruGates[i] <--> wireNic.wires[i + rsuCount];
+        }
+        
+        for i = 0..(hospitalCount - 1) {
+            appl.hospitalGates[i] <--> wireNic.internalWires[i + rsuCount + eruCount];
+            hospitalGates[i] <--> wireNic.wires[i + rsuCount + eruCount];
+        }
 }
