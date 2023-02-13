@@ -28,7 +28,7 @@ void HospitalAppl::handleMessage(cMessage *msg)
                 recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
                 handleLowerMsg(msg);
             }
-            else if (msg->getArrivalGateId() == eruIn) {
+            else if (strcmp(msg->getArrivalGate()->getName(), "eruGates$i") == 0) {
                 recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
                 handleLowerMsg(msg);
             }
@@ -52,17 +52,7 @@ void HospitalAppl::handleMessage(cMessage *msg)
 }
 void HospitalAppl::initialize(int stage)
 {
-
     DemoBaseApplLayer::initialize(stage);
-    eruIn = findGate("eruIn");
-    eruOut = findGate("eruOut");
-    if (stage == 0)
-    {
-
-    }
-    else if (stage == 1)
-    {
-    }
 }
 
 void HospitalAppl::onWSM(BaseFrame1609_4* frame)

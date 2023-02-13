@@ -1,23 +1,18 @@
 #include <string.h>
 #include <omnetpp.h>
+#include "veins/modules/messages/AccidentMessage_m.h"
 
 using namespace omnetpp;
 
-/**
- * Derive the Txc1 class from cSimpleModule. In the Tictoc1 network,
- * both the `tic' and `toc' modules are Txc1 objects, created by OMNeT++
- * at the beginning of the simulation.
- */
 class NicEth: public cSimpleModule
 {
   protected:
-    // The following redefined virtual function holds the algorithm.
-    int wireIn;
-    int wireOut;
-    int internalWireIn;
-    int internalWireOut;
+    int wireCount;
     virtual void initialize() override;
     virtual void handleMessage(cMessage *msg) override;
+
+  private:
+    void forwardMessage(cMessage *msg, std::string outGateName, int gateIndex);
 };
 
 // The module class needs to be registered with OMNeT++
@@ -26,29 +21,36 @@ Define_Module(NicEth);
 
 void NicEth::initialize()
 {
-    cMessage *msg = new cMessage("tictocMsg");
-    wireIn = findGate("wire$i");
-    wireOut = findGate("wire$o");
-    internalWireIn = findGate("internalWireIn");
-    internalWireOut = findGate("internalWireOut");
-    //sendDelayed(msg, simTime() + exponential(5.0), "internalWireOut");
+    /*
+     * Get wireCount parameter and find gates;
+     */
+    wireCount = par("wireCount");
+
+}
+
+/*
+ * Forwards message to application layer or to the external wires
+ */
+void NicEth::forwardMessage(cMessage *msg, std::string outGateName, int gateIndex) {
+    const std::string outGatePath = outGateName + "$o";
+    cGate* outGate = gate(findGate(outGatePath.c_str(), gateIndex));
+    if(outGate->isPathOK()) {
+        send(msg->dup(), outGate);
+    } else {
+        EV << "\nDiscarted Message";
+    }
 }
 
 void NicEth::handleMessage(cMessage *msg)
 {
-    EV << "Entrou no handle message Eth";
-    if(msg->getArrivalGateId() == wireIn) {
-        send(msg->dup(), "internalWireOut");
-    } else if (msg->getArrivalGateId() == internalWireIn) {
-
-        cGate *outGate = gate(wireOut);
-        if(outGate->isPathOK()) {
-            send(msg->dup(), "wire$o");
-        }
-        else {
-            EV << "\nDiscarted beacon\n";
-        }
-
+    cGate *msgGate = msg->getArrivalGate();
+    int gateIndex = msgGate->getIndex();
+    // Send message through external wires
+    if(strcmp(msgGate->getName(), "internalWires$i") == 0) {
+        forwardMessage(msg, "wires", gateIndex);
+    // Send message through internal wires
+    } else if (strcmp(msgGate->getName(), "wires$i") == 0) {
+        forwardMessage(msg, "internalWires", gateIndex);
     } else if (msg->getArrivalGateId() == -1) {
         /* Classes extending this class may not use all the gates, f.e.
          * BaseApplLayer has no upper gates. In this case all upper gate-

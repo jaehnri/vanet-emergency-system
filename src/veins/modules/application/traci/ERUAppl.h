@@ -14,12 +14,6 @@ public:
 protected:
     //Additions
     void handleMessage(cMessage *msg) override;
-    int rsuIn;
-    int rsuOut;
-    int firstHospitalIn;
-    int firstHospitalOut;
-    int secondHospitalIn;
-    int secondHospitalOut;
 
     //void onBSM(DemoSafetyMessage* bsm) override;
     void onWSM(BaseFrame1609_4* wsm) override;

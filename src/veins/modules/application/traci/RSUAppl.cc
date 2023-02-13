@@ -31,8 +31,9 @@ void RSUAppl::handleMessage(cMessage *msg)
             recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
             handleLowerMsg(msg);
         }
-        else if (msg->getArrivalGateId() == eruIn) {
-            EV << "Pacote veio pelo fio";
+        else if (strcmp(msg->getArrivalGate()->getName(), "rsuGates$i") == 0) {
+            lastGateReceived = msg->getArrivalGate()->getIndex();
+            handleLowerMsg(msg);
         }
         else if (msg->getArrivalGateId() == -1) {
             /* Classes extending this class may not use all the gates, f.e.
@@ -56,20 +57,9 @@ void RSUAppl::handleMessage(cMessage *msg)
 void RSUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
-    eruIn = findGate("eruIn");
-    eruOut = findGate("eruOut");
-    if (stage == 0)
-    {
-        //mobility= TraCIMobilityAccess().get(getParentModule());
-        //traci=mobility->getCommandInterface();
-        //traciVehicle=mobility->getVehicleCommandInterface();
+    rsuConnections = par("rsuCount");
+    eruConnections = par("eruCount");
 
-
-     }
-    else if (stage == 1)
-    {
-
-    }
 }
 void RSUAppl::handleSelfMsg(cMessage* msg)
 {
@@ -108,13 +98,44 @@ void RSUAppl::handleSelfMsg(cMessage* msg)
         }
     }
 }
+
+/*
+ * Forwards message to all rsu gates except one.
+ */
+void RSUAppl::forwardAccidentMsgExcept(AccidentMessage* wsm, int receivedFromIndex) {
+    for(int i = 0; i < rsuConnections; i++) {
+        if(i != receivedFromIndex) send(wsm->dup(), "rsuGates$o", i);
+    }
+
+}
+
+/*
+ * Forwards message to all rsu gates.
+ */
+void RSUAppl::forwardAccidentMsgAll(AccidentMessage* wsm) {
+    for(int i = 0; i < rsuConnections; i++) {
+        send(wsm->dup(), "rsuGates$o", i);
+    }
+
+}
+
 void RSUAppl::onWSM(BaseFrame1609_4* frame) {
     if (frame->getKind() == SEND_ACCIDENT_EVT) {
-        std::cout<<"RSU received accident information from vehicle"<<endl;
-
         AccidentMessage* wsm = check_and_cast<AccidentMessage*>(frame);
-        send(wsm->dup(), "eruOut");
-        std::cout<<"RSU forward accident information to Emergency Center"<<endl;
+        EV << "Received Accident Message from Gate: " << lastGateReceived << endl;
+        AccidentMessage* newWsm = wsm->dup();
+        newWsm->setA_isFromVehicle(false);
+        if(eruConnections > 0) {
+            EV << "RSU with ERU\n";
+            send(newWsm, "eruGates$o", 0);
+        }
+
+        else
+            if(!wsm->getA_isFromVehicle())
+                forwardAccidentMsgExcept(newWsm, lastGateReceived);
+            else
+                forwardAccidentMsgAll(newWsm);
+        std::cout<<"RSU forward accident message"<<endl;
     }
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
             A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);

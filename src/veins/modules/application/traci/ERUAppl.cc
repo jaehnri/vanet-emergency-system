@@ -6,6 +6,7 @@ using namespace veins;
 Define_Module(veins::ERUAppl);
 void ERUAppl::handleMessage(cMessage *msg)
 {
+    cGate* msgGate = msg->getArrivalGate();
     if (msg->isSelfMessage()) {
                 handleSelfMsg(msg);
             }
@@ -25,11 +26,11 @@ void ERUAppl::handleMessage(cMessage *msg)
                 recordPacket(PassedMessage::INCOMING, PassedMessage::LOWER_DATA, msg);
                 handleLowerMsg(msg);
             }
-            else if (msg->getArrivalGateId() == rsuIn) {
+            else if (strcmp(msgGate->getName(), "rsuGates$i") == 0) {
                 EV << "Pacote veio pela rsu" << endl;
                 handleLowerMsg(msg);
             }
-            else if (msg->getArrivalGateId() == firstHospitalIn || msg->getArrivalGateId() == secondHospitalIn) {
+            else if (strcmp(msgGate->getName(), "hospitalGates$i") == 0) {
                             EV << "Pacote veio por um dos hospitais" << endl;
             }
             else if (msg->getArrivalGateId() == -1) {
@@ -53,12 +54,6 @@ void ERUAppl::handleMessage(cMessage *msg)
 void ERUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
-    rsuIn = findGate("rsuIn");
-    rsuOut = findGate("rsuOut");
-    firstHospitalIn = findGate("firstHospitalIn");
-    firstHospitalOut = findGate("firstHospitalOut");
-    secondHospitalIn = findGate("secondHospitalIn");
-    secondHospitalOut = findGate("secondHospitalOut");
 
     firstHospital.x = 1500;
     firstHospital.y = 500;
@@ -102,10 +97,10 @@ void ERUAppl::onWSM(BaseFrame1609_4* frame)
 
        int nearestHospital = getNearestHospital(wsm->getA_location(), firstHospital, secondHospital);
        if (nearestHospital == 1) {
-           send(wsm->dup(), "firstHospitalOut");
+           send(wsm->dup(), "hospitalGates$o", 0);
        }
        if (nearestHospital == 2) {
-           send(wsm->dup(), "secondHospitalOut");
+           send(wsm->dup(), "hospitalGates$o", 1);
        }
        std::cout<<"ERU forward accident information to first Hospital"<<endl;
    }
