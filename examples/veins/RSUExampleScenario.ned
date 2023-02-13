@@ -5,7 +5,6 @@ import org.car2x.veins.modules.application.traci.RSUAppl; //added
 network RSUExampleScenario extends Scenario
 {
     parameters:
-        int numRsu = default(0);
         @display("bgb=1600,1500");
     submodules:
         //start
@@ -20,7 +19,6 @@ network RSUExampleScenario extends Scenario
         }
         //end
         rsu[3]: RSU {
-            eruCount = 1;
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 
@@ -28,7 +26,10 @@ network RSUExampleScenario extends Scenario
             @display("i=veins/node/trafficlight;p=325.42624,127.89125");
         }
     connections allowunconnected:
-        eru.rsuGates[0] <--> rsu[0].eruGates[0];
+        eru.rsuGates[0] <--> rsu[2].eruGates[0];
+        
+        rsu[0].rsuGates[0] <--> rsu[1].rsuGates[0];
+        rsu[1].rsuGates[1] <--> rsu[2].rsuGates[0];
 
 		eru.hospitalGates[0] <--> Hospital[0].eruGates[0];
 		eru.hospitalGates[1] <--> Hospital[1].eruGates[0];

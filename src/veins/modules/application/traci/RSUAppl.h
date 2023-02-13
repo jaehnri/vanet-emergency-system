@@ -1,6 +1,7 @@
 #pragma once
 #include "veins/modules/application/ieee80211p/DemoBaseApplLayer.h"
 #include "veins/modules/mobility/traci/TraCIMobility.h"  //added kafe
+#include "veins/modules/messages/AccidentMessage_m.h"
 
 namespace veins {
 
@@ -22,6 +23,11 @@ public:
     //end
     void finish() override;
 
+    // number of rsu's connected to this rsu.
+    int rsuConnections;
+    int eruConnections;
+    int lastGateReceived;
+
 protected:
         //Additions
         void handleMessage(cMessage *msg) override;
@@ -37,6 +43,8 @@ protected:
         //cMessage* serviceAdvertisementEvent; //need to change to cMessage* sendAdvEvt
         void sendAdvertisement(int var);
         void onWSM(BaseFrame1609_4* wsm) override;
+        void forwardAccidentMsgExcept(AccidentMessage* wsm, int receivedFromIndex);
+        void forwardAccidentMsgAll(AccidentMessage* wsm);
 
 
 public:

@@ -115,6 +115,7 @@ void VehicleAppl::sendAccidentMessage() // assigned array indexed values to wsm 
     wsm->setA_location(curPosition);
     wsm->setA_speed(traciVehicle->getSpeed());
     wsm->setKind(SEND_ACCIDENT_EVT);
+    wsm->setA_isFromVehicle(true);
 
     sendDown(wsm->dup());
     cout << "Vehicle sends Accident Report Message(ARM) at: " << simTime() << " with location=" << wsm->getA_location()<<"speed="<<wsm->getA_speed()<< endl;
