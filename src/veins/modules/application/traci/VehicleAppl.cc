@@ -34,12 +34,15 @@ void VehicleAppl::initialize(int stage) {
         std::cout << "vehicle sumo type id " << vehicleSumoTypeId << endl;
         //vehicleSumoTypeId = traci->getVType();
 
-
         // Only the "accident car" should send the accident message
         if (!isAmbulance() && !isNormalVehicle()) {
             sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
+
+        //TODO: fetch accident from message
+        accidentLocation.x = 600;
+        accidentLocation.y = 600;
    }
 }
 void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
@@ -90,6 +93,12 @@ void VehicleAppl::handleSelfMsg(cMessage *msg)
 void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
 
+    if (ambulanceHasArrived(30)) {
+        simtime_t arrivalTime = simTime();
+        cout << "Ambulance reached destination at " << arrivalTime << endl;
+        DemoBaseApplLayer::updateArrivalTime(arrivalTime);
+    }
+
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
         A2TMessage11p* wsm = new A2TMessage11p();
         populateWSM(wsm);
@@ -123,7 +132,7 @@ void VehicleAppl::sendAccidentMessage() // assigned array indexed values to wsm 
 
 void VehicleAppl::finish()
 {
-    VehicleAppl::finish();
+    DemoBaseApplLayer::finish();
 }
 
 bool VehicleAppl::isAmbulance() {
@@ -132,4 +141,8 @@ bool VehicleAppl::isAmbulance() {
 
 bool VehicleAppl::isNormalVehicle() {
     return vehicleSumoTypeId == "normal";
+}
+
+bool VehicleAppl::ambulanceHasArrived(int distanceFromAccident) {
+    return isAmbulance() && (traci->getDistance(curPosition, accidentLocation, false) < distanceFromAccident);
 }

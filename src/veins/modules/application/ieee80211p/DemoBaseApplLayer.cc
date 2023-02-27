@@ -59,6 +59,7 @@ void DemoBaseApplLayer::initialize(int stage)
         receivedBSMs = 0;
         receivedWSAs = 0;
         receivedWSMs = 0;
+        ambulanceArrivalTime = 0;
     }
     else if (stage == 1) {
 
@@ -243,6 +244,8 @@ void DemoBaseApplLayer::finish()
 
     recordScalar("generatedWSAs", generatedWSAs);
     recordScalar("receivedWSAs", receivedWSAs);
+
+    recordScalar("ambulanceArrivalTime", ambulanceArrivalTime.dbl());
 }
 
 DemoBaseApplLayer::~DemoBaseApplLayer()
@@ -304,5 +307,12 @@ void DemoBaseApplLayer::checkAndTrackPacket(cMessage* msg)
     else if (dynamic_cast<BaseFrame1609_4*>(msg)) {
         EV_TRACE << "sending down a wsm" << std::endl;
         generatedWSMs++;
+    }
+}
+
+void DemoBaseApplLayer::updateArrivalTime(simtime_t arrivalTime) {
+    // ambulance should arrive only once
+    if (ambulanceArrivalTime == 0) {
+        ambulanceArrivalTime = arrivalTime;
     }
 }

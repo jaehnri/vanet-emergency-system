@@ -10,6 +10,7 @@ public:
     void finish() override;
     bool isAmbulance();
     bool isNormalVehicle();
+    bool ambulanceHasArrived(int distanceFromAccident);
 protected:
     //Vehicle identification
     int vehicleVeinsId;
@@ -26,10 +27,12 @@ protected:
     simtime_t broadcastInterval; /* Interval between broadcasts */
     simtime_t lastBroadcastAt;   /* [AMU] Simulation time of the last message broadcasted */
     int priority;                /* Priority of the vehicle */
+    Coord accidentLocation;
+
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
     void handleSelfMsg(cMessage* msg) override;
     void handlePositionUpdate(cObject* obj) override;
-    void sendAccidentMessage();    //added
+    void sendAccidentMessage();
   };
 }// namespace veins
