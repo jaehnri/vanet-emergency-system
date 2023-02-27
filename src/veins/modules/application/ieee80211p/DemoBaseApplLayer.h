@@ -153,6 +153,7 @@ protected:
     uint32_t receivedWSMs;
     uint32_t receivedWSAs;
     uint32_t receivedBSMs;
+    simtime_t travelTime;
 
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;

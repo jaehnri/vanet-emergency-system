@@ -26,6 +26,8 @@ protected:
     simtime_t broadcastInterval; /* Interval between broadcasts */
     simtime_t lastBroadcastAt;   /* [AMU] Simulation time of the last message broadcasted */
     int priority;                /* Priority of the vehicle */
+
+    Coord accidentLocation;
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;
     void handleSelfMsg(cMessage* msg) override;

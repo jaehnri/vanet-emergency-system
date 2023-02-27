@@ -40,6 +40,9 @@ void TraCIDemo11p::initialize(int stage) {
             sendAcdntEvt = new cMessage("Accident event at DemoBaseApplLayer", SEND_ACCIDENT_EVT);
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
+
+        accidentLocation.x = 600;
+        accidentLocation.y = 600;
    }
 }
 void TraCIDemo11p::onWSM(BaseFrame1609_4 *frame) {
@@ -89,6 +92,11 @@ void TraCIDemo11p::handleSelfMsg(cMessage *msg)
 
 void TraCIDemo11p::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
+
+    if (isAmbulance() && traci->getDistance(curPosition, accidentLocation, false) < 50) {
+        cout << "Ambulance reached destination at " << simTime() << endl;
+        DemoBaseApplLayer::travelTime = simTime();
+    }
 
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
         A2TMessage11p* wsm = new A2TMessage11p();
