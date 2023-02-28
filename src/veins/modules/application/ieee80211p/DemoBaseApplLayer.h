@@ -107,13 +107,6 @@ protected:
      */
     virtual void checkAndTrackPacket(cMessage* msg);
 
-    /**
-     * @brief updates ambulance arrival time at accident location
-     *
-     * @param arrivalTime time of ambulance's arrival
-     */
-    virtual void updateArrivalTime(simtime_t arrivalTime);
-
 protected:
     /* pointers ill be set when used with TraCIMobility */
     TraCIMobility* mobility;
@@ -156,7 +149,6 @@ protected:
     uint32_t receivedWSMs;
     uint32_t receivedWSAs;
     uint32_t receivedBSMs;
-    simtime_t ambulanceArrivalTime;
 
     /* messages for periodic events such as beacon and WSA transmissions */
     cMessage* sendBeaconEvt;

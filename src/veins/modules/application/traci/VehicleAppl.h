@@ -11,6 +11,8 @@ public:
     bool isAmbulance();
     bool isNormalVehicle();
     bool ambulanceHasArrived(int distanceFromAccident);
+    virtual void updateArrivalTime(simtime_t arrivalTime);
+
 protected:
     //Vehicle identification
     int vehicleVeinsId;
@@ -28,6 +30,10 @@ protected:
     simtime_t lastBroadcastAt;   /* [AMU] Simulation time of the last message broadcasted */
     int priority;                /* Priority of the vehicle */
     Coord accidentLocation;
+
+    /* stats */
+    simtime_t ambulanceArrivalTime;
+
 
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;

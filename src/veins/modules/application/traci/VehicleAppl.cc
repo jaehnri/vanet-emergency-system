@@ -40,6 +40,8 @@ void VehicleAppl::initialize(int stage) {
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
 
+        ambulanceArrivalTime = 0;
+
         //TODO: fetch accident from message
         accidentLocation.x = 600;
         accidentLocation.y = 600;
@@ -96,7 +98,7 @@ void VehicleAppl::handlePositionUpdate(cObject* obj) {
     if (ambulanceHasArrived(30)) {
         simtime_t arrivalTime = simTime();
         cout << "Ambulance reached destination at " << arrivalTime << endl;
-        DemoBaseApplLayer::updateArrivalTime(arrivalTime);
+        updateArrivalTime(arrivalTime);
     }
 
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
@@ -132,7 +134,9 @@ void VehicleAppl::sendAccidentMessage() // assigned array indexed values to wsm 
 
 void VehicleAppl::finish()
 {
-    DemoBaseApplLayer::finish();
+    if (isAmbulance()) {
+        recordScalar("ambulanceArrivalTime", ambulanceArrivalTime.dbl());
+    }
 }
 
 bool VehicleAppl::isAmbulance() {
@@ -145,4 +149,11 @@ bool VehicleAppl::isNormalVehicle() {
 
 bool VehicleAppl::ambulanceHasArrived(int distanceFromAccident) {
     return isAmbulance() && (traci->getDistance(curPosition, accidentLocation, false) < distanceFromAccident);
+}
+
+void VehicleAppl::updateArrivalTime(simtime_t arrivalTime) {
+    // ambulance should arrive only once
+    if (ambulanceArrivalTime == 0) {
+        ambulanceArrivalTime = arrivalTime;
+    }
 }
