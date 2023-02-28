@@ -105,10 +105,6 @@ protected:
      *
      * @param msg the message to be checked and tracked
      */
-
-
-    //virtual void sendDirect(cMessage *msg, cModule *mod, const char *gateName);
-
     virtual void checkAndTrackPacket(cMessage* msg);
 
 protected:
