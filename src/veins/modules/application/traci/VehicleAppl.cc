@@ -16,6 +16,7 @@ void VehicleAppl::initialize(int stage) {
 
         accidentmessagetinterval = par("ACCIDENTMESSAGETINTERVAL");
         broadcastInterval = par("broadcastInterval");
+        canChangeLane = getParentModule()->par("canChangeLane");
 
         lastBroadcastAt = simTime();
         priority = 0;
@@ -51,7 +52,7 @@ void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
-        if (wsm->isFromAmbulance()) {
+        if (wsm->isFromAmbulance() && canChangeLane) {
             traciVehicle->changeLane(0, 5.0);
         }
     }

@@ -34,6 +34,9 @@ protected:
     /* stats */
     simtime_t ambulanceArrivalTime;
 
+    /* For simulation purpose */
+    bool canChangeLane;
+
 
 protected:
     void onWSM(BaseFrame1609_4* wsm) override;

@@ -7,6 +7,7 @@ module Car
         string applType; //type of the application layer
         string nicType = default("Nic80211p"); // type of network interface card
         string veinsmobilityType = default("org.car2x.veins.modules.mobility.traci.TraCIMobility"); //type of the mobility module
+        bool canChangeLane = default(true);
     gates:
         input veinsradioIn; // gate for sendDirect
     submodules:

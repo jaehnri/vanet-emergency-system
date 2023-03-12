@@ -22,6 +22,7 @@ protected:
     simtime_t lastUpdate;       /* Time of the last update */
     int memorizedAmuId; /* Ambulance ID memorized by the RSU */
     int highestPriority;        /* Highest priority recorded */
+    bool canOpenTraffic;
 
     //
     TraCICommandInterface::Trafficlight* traciTl;

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Mon Dec 19 14:54:08 2022 by Eclipse SUMO netedit Version 1.8.0
+<!-- generated on Sat Mar 11 15:06:58 2023 by Eclipse SUMO netedit Version 1.8.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
-        <sumo-net-file value="./examples/veins/first.net.xml"/>
+        <sumo-net-file value="/root/models/projects/vanet-emergency-system/examples/veins/first.net.xml"/>
     </input>
 
     <output>
-        <output-file value="./examples/veins/first.net.xml"/>
+        <output-file value="/root/models/projects/vanet-emergency-system/examples/veins/first.net.xml"/>
     </output>
 
     <processing>
@@ -2611,15 +2611,15 @@
     </edge>
 
     <tlLogic id="n33" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGGGggrrrrrrGGGGggrrrrrr"/>
+        <phase duration="120" state="GGGGggrrrrrrGGGGggrrrrrr"/>
         <phase duration="3"  state="yyyyyyrrrrrryyyyyyrrrrrr"/>
-        <phase duration="42" state="rrrrrrGGGGggrrrrrrGGGGgg"/>
+        <phase duration="120" state="rrrrrrGGGGggrrrrrrGGGGgg"/>
         <phase duration="3"  state="rrrrrryyyyyyrrrrrryyyyyy"/>
     </tlLogic>
     <tlLogic id="n43" type="static" programID="0" offset="0">
-        <phase duration="42" state="GGGGggrrrrrrGGGGggrrrrrr"/>
+        <phase duration="120" state="GGGGggrrrrrrGGGGggrrrrrr"/>
         <phase duration="3"  state="yyyyyyrrrrrryyyyyyrrrrrr"/>
-        <phase duration="42" state="rrrrrrGGGGggrrrrrrGGGGgg"/>
+        <phase duration="120" state="rrrrrrGGGGggrrrrrrGGGGgg"/>
         <phase duration="3"  state="rrrrrryyyyyyrrrrrryyyyyy"/>
     </tlLogic>
 

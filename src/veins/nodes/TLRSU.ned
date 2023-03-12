@@ -23,6 +23,7 @@ module TLRSU
     parameters:
         string applType; //type of the application layer
         string nicType = default("Nic80211p"); // type of network interface card
+        bool canOpenTraffic = default(true);
     gates:
         input veinsradioIn; // gate for sendDirect
     submodules:

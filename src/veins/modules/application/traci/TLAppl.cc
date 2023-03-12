@@ -9,6 +9,7 @@ Define_Module(veins::TLAppl);
 void TLAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
+    canOpenTraffic = getParentModule()->par("canOpenTraffic");
     //mobility = TraCIMobilityAccess().get(getParentModule());
     if (stage == 0)
     {
@@ -66,7 +67,9 @@ void TLAppl::onWSM(BaseFrame1609_4* frame) {
                     std::string amuLaneId = wsm->getAmuLaneId();
                     std::string amuRoadId = traci->lane(amuLaneId).getRoadId();
                     std::cout << "amuRoadId: " << amuRoadId << endl;
-                    openTraffic(amuRoadId);
+                    if(canOpenTraffic) {
+                        openTraffic(amuRoadId);
+                    }
 
 
                     if (associatedTl.isControlling(amuRoadId))
@@ -76,13 +79,13 @@ void TLAppl::onWSM(BaseFrame1609_4* frame) {
 
                         if (wsmPriority == highestPriority)
                         {
-                            if (wsmAmuId == memorizedAmuId || memorizedAmuId == -1)
+                            if ((wsmAmuId == memorizedAmuId || memorizedAmuId == -1) && canOpenTraffic)
                             {
                                 associatedTl.prioritizeRoad(amuRoadId);
                                 update(wsmAmuId, wsmPriority);
                             }
                         }
-                        else if (wsmPriority > highestPriority)
+                        else if (wsmPriority > highestPriority && canOpenTraffic)
                         {
                             associatedTl.prioritizeRoad(amuRoadId);
                             update(wsmAmuId, wsmPriority);

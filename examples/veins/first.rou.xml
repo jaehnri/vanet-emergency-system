@@ -44,8 +44,8 @@
     <vType id="emergency" maxSpeed="70.00" speedFactor="normc(2.00,0.00)" vClass="emergency" color="white" accel="3"/>
     <vType id="normal" maxSpeed="10.00" speedFactor="normc(2.00,0.00)" vClass="ignoring" color="blue" accel="3"/>
     
-    <route edges="e13-23 e23-33 e33-43" color="yellow" id="route_0"/>
-    <route edges="e53-43 e43-33 e33-23 e23-13" color="yellow" id="route_1"/>
+    <route edges="e23-33 e33-43" color="yellow" id="route_0"/>
+    <route edges="e53-43 e43-33 e33-23" color="yellow" id="route_1"/>
     
     
     <vehicle id="vehicle_0" depart="0.00" route="route_0"/>
