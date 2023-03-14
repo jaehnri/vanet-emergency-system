@@ -10,6 +10,7 @@ public:
     void finish() override;
     Coord firstHospital;
     Coord secondHospital;
+    bool hospitalCalculation;
 
 protected:
     //Additions

@@ -46,6 +46,7 @@
     
     <route edges="e23-33 e33-43" color="yellow" id="route_0"/>
     <route edges="e53-43 e43-33 e33-23" color="yellow" id="route_1"/>
+    <route edges="e00-10 e10-20 e20-21 e21-22 e22-23" color="yellow" id="route_2"/>
     
     
     <vehicle id="vehicle_0" depart="0.00" route="route_0"/>

@@ -11,6 +11,7 @@ module RSU
         int rsuCount = default(0);
         int eruCount = default(0);
         int hospitalCount = default(0);
+        bool hospitalCalculation = default(true);
     gates:
         input veinsradioIn; // gate for sendDirect  
         inout rsuGates[rsuCount];

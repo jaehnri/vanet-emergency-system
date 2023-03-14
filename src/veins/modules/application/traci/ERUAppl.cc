@@ -1,4 +1,7 @@
 #include <cmath>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <veins/modules/application/traci/ERUAppl.h>
 #include "veins/modules/messages/AccidentMessage_m.h"
 
@@ -54,10 +57,10 @@ void ERUAppl::handleMessage(cMessage *msg)
 void ERUAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
-
+    hospitalCalculation = getParentModule()->par("hospitalCalculation");
     firstHospital.x = 1500;
     firstHospital.y = 500;
-    secondHospital.x = 1500;
+    secondHospital.x = 0;
     secondHospital.y = 1500;
 }
 
@@ -112,18 +115,24 @@ void ERUAppl::finish()
 
 
 int ERUAppl::getNearestHospital(Coord accidentLocation, Coord first, Coord second) {
-    double distanceFromFirst = sqrt(
+    if(hospitalCalculation) {
+        double distanceFromFirst = sqrt(
             pow(std::abs(accidentLocation.x - first.x), 2) +
             pow(std::abs(accidentLocation.y - first.y), 2));
-    EV << "First hospital's distance from accident is " << distanceFromFirst << endl;
-    double distanceFromSecond = sqrt(
-                pow(std::abs(accidentLocation.x - second.x), 2) +
-                pow(std::abs(accidentLocation.y - second.y), 2));
-    EV << "Second hospital's distance from accident is " << distanceFromSecond << endl;
+        EV << "First hospital's distance from accident is " << distanceFromFirst << endl;
+        double distanceFromSecond = sqrt(
+                  pow(std::abs(accidentLocation.x - second.x), 2) +
+                  pow(std::abs(accidentLocation.y - second.y), 2));
+        EV << "Second hospital's distance from accident is " << distanceFromSecond << endl;
 
-    if (distanceFromFirst < distanceFromSecond) {
-        return 1;
+        if (distanceFromFirst < distanceFromSecond) {
+           return 1;
+        }
+
+        return 2;
     }
 
+    //srand(time(nullptr));
+    //return rand() % 2 + 1;
     return 2;
 }

@@ -1,3 +1,4 @@
+
 #include <veins/modules/application/traci/HospitalAppl.h>
 #include "veins/modules/messages/AccidentMessage_m.h"
 #include "veins/modules/messages/TraCIDemo11pMessage_m.h"
@@ -53,6 +54,8 @@ void HospitalAppl::handleMessage(cMessage *msg)
 void HospitalAppl::initialize(int stage)
 {
     DemoBaseApplLayer::initialize(stage);
+    EV << "Hospital Index" << getParentModule()->getIndex() << endl;
+
 }
 
 void HospitalAppl::onWSM(BaseFrame1609_4* frame)
@@ -93,7 +96,10 @@ void HospitalAppl::setTraCI()
 {
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
     traci = manager->getCommandInterface();
-    traci->addVehicle("testvehicle", "emergency", "route_1");
+    if(getParentModule()->getIndex() == 0)
+        traci->addVehicle("testvehicle", "emergency", "route_1");
+    else
+        traci->addVehicle("testvehicle", "emergency", "route_2");
     traci->DEPART_POSITION_RANDOM;
     std::cout<<"Hospital sent out an ambulance to the accident location"<<endl;
 }
