@@ -1,55 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on Mon 21 Nov 2022 06:59:18 PM -03 by Eclipse SUMO netedit Version 1.8.0
-<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
-
-    <input>
-        <sumo-net-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
-    </input>
-
-    <output>
-        <output-file value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.net.xml"/>
-    </output>
-
-    <processing>
-        <geometry.min-radius.fix.railways value="false"/>
-        <geometry.max-grade.fix value="false"/>
-        <offset.disable-normalization value="true"/>
-        <lefthand value="false"/>
-    </processing>
-
-    <junctions>
-        <no-turnarounds value="true"/>
-        <junctions.corner-detail value="5"/>
-        <junctions.limit-turn-speed value="5.5"/>
-        <rectangular-lane-cut value="false"/>
-    </junctions>
-
-    <pedestrian>
-        <walkingareas value="false"/>
-    </pedestrian>
-
-    <netedit>
-        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/first.rou.xml"/>
-    </netedit>
-
-    <report>
-        <aggregate-warnings value="5"/>
-    </report>
-
-</configuration>
+<!-- generated on 2023-02-28 09:29:33 by Eclipse SUMO netedit Version 1.12.0
 -->
 
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
     <vType id="emergency" maxSpeed="70.00" speedFactor="normc(2.00,0.00)" vClass="emergency" color="white" accel="3"/>
     <vType id="normal" maxSpeed="10.00" speedFactor="normc(2.00,0.00)" vClass="ignoring" color="blue" accel="3"/>
-    
-    <route edges="e13-23 e23-33 e33-43" color="yellow" id="route_0"/>
-    <route edges="e53-43 e43-33 e33-23 e23-13" color="yellow" id="route_1"/>
-    
-    
+    <route id="route_0" edges="e13-23 e23-33 e33-43" color="yellow"/>
+    <route id="route_1" edges="e53-43 e43-33 e33-23 e23-13" color="yellow"/>
+    <trip id="0" depart="0.00" from="e34-33" to="e01-02"/>
     <vehicle id="vehicle_0" depart="0.00" route="route_0"/>
-    <vehicle id="vehicle_1" type="normal" depart="1.00" route="route_1" departLane="free"/>
-    <vehicle id="vehicle_2" type="normal" depart="1.15" route="route_1" departLane="free"/>
-    <vehicle id="vehicle_3" type="normal" depart="1.30" route="route_1" departLane="free"/>
+    <trip id="1" depart="1.00" from="e14-15" to="e12-22"/>
+    <vehicle id="vehicle_1" type="normal" depart="1.00" departLane="free" route="route_1"/>
+    <vehicle id="vehicle_2" type="normal" depart="1.15" departLane="free" route="route_1"/>
+    <vehicle id="vehicle_3" type="normal" depart="1.30" departLane="free" route="route_1"/>
+    <trip id="2" depart="2.00" from="e41-51" to="e35-45"/>
+    <trip id="3" depart="3.00" from="e51-50" to="e03-13"/>
+    <trip id="4" depart="4.00" from="e23-22" to="e01-02"/>
+    <trip id="5" depart="5.00" from="e12-22" to="e30-20"/>
+    <trip id="6" depart="6.00" from="e01-02" to="e12-02"/>
+    <trip id="7" depart="7.00" from="e34-35" to="e31-32"/>
+    <trip id="8" depart="8.00" from="e12-22" to="e32-42"/>
+    <trip id="9" depart="9.00" from="e44-34" to="e00-01"/>
 </routes>
