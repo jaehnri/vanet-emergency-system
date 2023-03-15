@@ -41,11 +41,11 @@ void VehicleAppl::initialize(int stage) {
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
 
-        ambulanceArrivalTime = 0;
+        ambulanceArrivalTime = -1;
 
         //TODO: fetch accident from message
-        accidentLocation.x = 600;
-        accidentLocation.y = 600;
+        accidentLocation.x = 648;
+        accidentLocation.y = 633;
    }
 }
 void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
@@ -154,7 +154,7 @@ bool VehicleAppl::ambulanceHasArrived(int distanceFromAccident) {
 
 void VehicleAppl::updateArrivalTime(simtime_t arrivalTime) {
     // ambulance should arrive only once
-    if (ambulanceArrivalTime == 0) {
+    if (ambulanceArrivalTime == -1) {
         ambulanceArrivalTime = arrivalTime;
     }
 }
