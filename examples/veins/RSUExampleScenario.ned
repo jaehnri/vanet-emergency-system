@@ -27,8 +27,8 @@ network RSUExampleScenario extends Scenario
             @display("i=veins/node/trafficlight;p=325.42624,127.89125");
         }
         
-        randomCars: TraCIVehicleInserter {
-        }
+        //randomCars: TraCIVehicleInserter {
+        //}
     connections allowunconnected:
         eru.rsuGates[0] <--> rsu[2].eruGates[0];
         
