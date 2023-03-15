@@ -2,7 +2,7 @@ import subprocess
 import pandas as pd
 
 def grep_results():
-    return subprocess.run(["grep", "-Hrn", "ambulanceArrivalTime", "../../examples/veins/results/"], stdout=subprocess.PIPE).stdout.decode("utf-8") 
+    return subprocess.run("grep -Hrn ambulanceArrivalTime ../../examples/veins/results/ | grep changeLane", shell=True, stdout=subprocess.PIPE).stdout.decode("utf-8") 
     
 '''
  The expected result received from the step above is as such:
@@ -35,10 +35,10 @@ def parse_results(raw_results):
         # false,false,false,100-#8.sca:5678:scalar
         simulation_parameters = simulation_parameters.split('-')[1]
 
-        # ['true', 'false', 'false', '100'] 
+        # ['changeLane=false', 'false', 'false', '100'] 
         simulation_parameters = simulation_parameters.split(',')
 
-        canChangeLane = simulation_parameters[0]
+        canChangeLane = simulation_parameters[0].split('=')[1]
         canOpenTraffic = simulation_parameters[1]
         canFindNearestHospital = simulation_parameters[2]
         numberOfVehicles = simulation_parameters[3]
