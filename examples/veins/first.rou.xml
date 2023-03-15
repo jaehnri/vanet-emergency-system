@@ -44,13 +44,37 @@
     <vType id="emergency" maxSpeed="70.00" speedFactor="normc(2.00,0.00)" vClass="emergency" color="white" accel="3"/>
     <vType id="normal" maxSpeed="10.00" speedFactor="normc(2.00,0.00)" vClass="ignoring" color="blue" accel="3"/>
     
-    <route edges="e23-33 e33-43" color="yellow" id="route_0"/>
-    <route edges="e53-43 e43-33 e33-23" color="yellow" id="route_1"/>
-    <route edges="e00-10 e10-20 e20-21 e21-22 e22-23 e23-33" color="yellow" id="route_2"/>
+    <route edges="e23-33 e33-43" color="yellow" id="accident_route"/>
+    <route edges="e53-43 e43-33 e33-23" color="yellow" id="amu_route_1"/>
+    <route edges="e00-10 e10-20 e20-21 e21-22 e22-23 e23-33" color="yellow" id="amu_route_2"/>
     
+    <route edges="e00-10 e10-20 e20-30 e30-40 e40-50" color="yellow" id="route_0"/>
+    <route edges="e50-40 e40-30 e30-20 e20-10 e10-00" color="yellow" id="route_1"/>
+    <route edges="e01-11 e11-21 e21-31 e31-41 e41-51" color="yellow" id="route_2"/>
+    <route edges="e51-41 e41-31 e31-21 e21-11 e11-01" color="yellow" id="route_3"/>
+    <route edges="e02-12 e12-22 e22-32 e32-42 e42-52" color="yellow" id="route_4"/>
+    <route edges="e52-42 e42-32 e32-22 e22-12 e12-02" color="yellow" id="route_5"/>
+    <route edges="e03-13 e13-23 e23-33 e33-43 e43-53" color="yellow" id="route_6"/>
+    <route edges="e53-43 e43-33 e33-23 e23-13 e13-03" color="yellow" id="route_7"/>
+    <route edges="e04-14 e14-24 e24-34 e34-44 e44-54" color="yellow" id="route_8"/>
+    <route edges="e54-44 e44-34 e34-24 e24-14 e14-04" color="yellow" id="route_9"/>
+    <route edges="e05-15 e15-25 e25-35 e35-45 e45-55" color="yellow" id="route_10"/>
+    <route edges="e55-45 e45-35 e35-25 e25-15 e15-05" color="yellow" id="route_11"/>
+    <route edges="e00-01 e01-02 e02-03 e03-04 e04-05" color="yellow" id="route_12"/>
+    <route edges="e05-04 e04-03 e03-02 e02-01 e01-00" color="yellow" id="route_13"/>
+    <route edges="e10-11 e11-12 e12-13 e13-14 e14-15" color="yellow" id="route_14"/>
+    <route edges="e15-14 e14-13 e13-12 e12-11 e11-10" color="yellow" id="route_15"/>
+    <route edges="e20-21 e21-22 e22-23 e23-24 e24-25" color="yellow" id="route_16"/>
+    <route edges="e25-24 e24-23 e23-22 e22-21 e21-20" color="yellow" id="route_17"/>
+    <route edges="e30-31 e31-32 e32-33 e33-34 e34-35" color="yellow" id="route_18"/>
+    <route edges="e35-34 e34-33 e33-32 e32-31 e31-30" color="yellow" id="route_19"/>
+    <route edges="e40-41 e41-42 e42-43 e43-44 e44-45" color="yellow" id="route_20"/>
+    <route edges="e45-44 e44-43 e43-42 e42-41 e41-40" color="yellow" id="route_21"/>
+    <route edges="e50-51 e51-52 e52-53 e53-54 e54-55" color="yellow" id="route_22"/>
+    <route edges="e55-54 e54-53 e53-52 e52-51 e51-50" color="yellow" id="route_23"/>
     
-    <vehicle id="vehicle_0" depart="0.00" route="route_0"/>
-    <vehicle id="vehicle_1" type="normal" depart="1.00" route="route_1" departLane="free"/>
-    <vehicle id="vehicle_2" type="normal" depart="1.15" route="route_1" departLane="free"/>
-    <vehicle id="vehicle_3" type="normal" depart="1.30" route="route_1" departLane="free"/>
+    <vehicle id="vehicle_0" depart="0.00" route="accident_route"/>
+    <vehicle id="vehicle_1" type="normal" depart="1.00" route="amu_route_1" departLane="free"/>
+    <vehicle id="vehicle_2" type="normal" depart="1.15" route="amu_route_1" departLane="free"/>
+    <vehicle id="vehicle_3" type="normal" depart="1.30" route="amu_route_1" departLane="free"/>
 </routes>
