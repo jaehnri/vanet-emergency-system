@@ -96,7 +96,7 @@ void VehicleAppl::handleSelfMsg(cMessage *msg)
 void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
 
-    if (ambulanceHasArrived(30)) {
+    if (ambulanceHasArrived(100)) {
         simtime_t arrivalTime = simTime();
         cout << "Ambulance reached destination at " << arrivalTime << endl;
         updateArrivalTime(arrivalTime);
