@@ -53,7 +53,7 @@ void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
         if (wsm->isFromAmbulance() && canChangeLane) {
-            traciVehicle->changeLane(0, 5.0);
+            traciVehicle->changeLane(0, 200.0);
         }
     }
 }
