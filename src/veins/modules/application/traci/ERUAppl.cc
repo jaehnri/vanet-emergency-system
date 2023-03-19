@@ -132,7 +132,7 @@ int ERUAppl::getNearestHospital(Coord accidentLocation, Coord first, Coord secon
         return 2;
     }
 
-    srand(time(nullptr));
-    return rand() % 2 + 1;
-    //return 2;
+    //srand(time(nullptr));
+    //return rand() % 2 + 1;
+    return 2;
 }

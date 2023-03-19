@@ -52,7 +52,7 @@ void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
-        if (wsm->isFromAmbulance() && canChangeLane) {
+        if (wsm->isFromAmbulance() && canChangeLane && isNormalVehicle()) {
             traciVehicle->changeLane(0, 200.0);
         }
     }
@@ -95,7 +95,7 @@ void VehicleAppl::handleSelfMsg(cMessage *msg)
 
 void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
-
+    //EV << "Vehicle ID: " << vehicleSumoId << " Speed: " <<  traciVehicle->getSpeed() << endl;
     if (ambulanceHasArrived(30)) {
         simtime_t arrivalTime = simTime();
         cout << "Ambulance reached destination at " << arrivalTime << endl;
