@@ -139,7 +139,8 @@ void TraCIVehicleInserter::insertVehicles()
         std::queue<std::string> vehicles = i->second;
         while (!i->second.empty()) {
             bool suc = false;
-            std::string type = i->second.front();
+            /* Modified by João Henri to only add "normal" vehicles */
+            std::string type = "normal"; // i->second.front();
             std::stringstream veh;
             veh << type << "_" << vehicleNameCounter;
             EV_DEBUG << "trying to add " << veh.str() << " with " << route << " vehicle type " << type << std::endl;

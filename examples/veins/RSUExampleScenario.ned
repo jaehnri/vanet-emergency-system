@@ -2,6 +2,7 @@ import org.car2x.veins.nodes.RSU;
 import org.car2x.veins.nodes.TLRSU; //added
 import org.car2x.veins.nodes.Scenario;
 import org.car2x.veins.modules.application.traci.RSUAppl; //added
+import org.car2x.veins.modules.mobility.traci.TraCIVehicleInserter; //added
 network RSUExampleScenario extends Scenario
 {
     parameters:
@@ -22,8 +23,11 @@ network RSUExampleScenario extends Scenario
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 
-        tls[2]: TLRSU {
+        tls[32]: TLRSU {
             @display("i=veins/node/trafficlight;p=325.42624,127.89125");
+        }
+        
+        randomCars: TraCIVehicleInserter {
         }
     connections allowunconnected:
         eru.rsuGates[0] <--> rsu[2].eruGates[0];

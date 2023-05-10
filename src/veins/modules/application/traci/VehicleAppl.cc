@@ -41,19 +41,19 @@ void VehicleAppl::initialize(int stage) {
             scheduleAt(simTime() + accidentmessagetinterval + exponential(5.0), sendAcdntEvt);
         }
 
-        ambulanceArrivalTime = 0;
+        ambulanceArrivalTime = -1;
 
         //TODO: fetch accident from message
-        accidentLocation.x = 600;
-        accidentLocation.y = 600;
+        accidentLocation.x = 648;
+        accidentLocation.y = 633;
    }
 }
 void VehicleAppl::onWSM(BaseFrame1609_4 *frame) {
     if (frame->getKind() == SEND_OPEN_TRAFFIC_LIGHT_EVT) {
         A2TMessage11p* wsm = check_and_cast<A2TMessage11p*>(frame);
 
-        if (wsm->isFromAmbulance() && canChangeLane) {
-            traciVehicle->changeLane(0, 5.0);
+        if (wsm->isFromAmbulance() && canChangeLane && isNormalVehicle()) {
+            traciVehicle->changeLane(0, 200.0);
         }
     }
 }
@@ -95,11 +95,12 @@ void VehicleAppl::handleSelfMsg(cMessage *msg)
 
 void VehicleAppl::handlePositionUpdate(cObject* obj) {
     DemoBaseApplLayer::handlePositionUpdate(obj);
-
+    //EV << "Vehicle ID: " << vehicleSumoId << " Speed: " <<  traciVehicle->getSpeed() << endl;
     if (ambulanceHasArrived(30)) {
         simtime_t arrivalTime = simTime();
         cout << "Ambulance reached destination at " << arrivalTime << endl;
         updateArrivalTime(arrivalTime);
+        endSimulation();
     }
 
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
@@ -154,7 +155,7 @@ bool VehicleAppl::ambulanceHasArrived(int distanceFromAccident) {
 
 void VehicleAppl::updateArrivalTime(simtime_t arrivalTime) {
     // ambulance should arrive only once
-    if (ambulanceArrivalTime == 0) {
+    if (ambulanceArrivalTime == -1) {
         ambulanceArrivalTime = arrivalTime;
     }
 }
