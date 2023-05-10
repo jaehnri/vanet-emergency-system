@@ -100,6 +100,7 @@ void VehicleAppl::handlePositionUpdate(cObject* obj) {
         simtime_t arrivalTime = simTime();
         cout << "Ambulance reached destination at " << arrivalTime << endl;
         updateArrivalTime(arrivalTime);
+        endSimulation();
     }
 
     if (isAmbulance() && simTime() - lastBroadcastAt >= broadcastInterval) {
