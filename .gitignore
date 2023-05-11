@@ -18,6 +18,8 @@ doc/neddoc
 /out
 
 examples/**/results
+examples/**/current_results
+examples/veins/results_backup
 examples/**/.tkenvrc
 examples/**/.qtenvrc
 examples/**/.cmdenv-log
