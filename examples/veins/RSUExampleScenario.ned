@@ -6,7 +6,7 @@ import org.car2x.veins.modules.mobility.traci.TraCIVehicleInserter; //added
 network RSUExampleScenario extends Scenario
 {
     parameters:
-        @display("bgb=1600,1500");
+        @display("bgb=3500,2100");
     submodules:
         //start
         eru: RSU {
@@ -23,9 +23,9 @@ network RSUExampleScenario extends Scenario
             @display("i=device/antennatower;p=422.9275,106.365");
         }
 
-        tls[32]: TLRSU {
-            @display("i=veins/node/trafficlight;p=325.42624,127.89125");
-        }
+//        tls[32]: TLRSU {
+//            @display("i=veins/node/trafficlight;p=325.42624,127.89125");
+//        }
         
         randomCars: TraCIVehicleInserter {
         }
