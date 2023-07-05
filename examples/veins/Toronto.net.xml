@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- generated on 2023-07-05 20:06:22 by Eclipse SUMO netedit Version 1.12.0
+<!-- generated on 2023-07-05 20:29:29 by Eclipse SUMO netedit Version 1.12.0
 <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/netconvertConfiguration.xsd">
 
     <input>
@@ -31,7 +31,7 @@
     </pedestrian>
 
     <netedit>
-        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/ambulance-route.rou.xml"/>
+        <route-files value="/home/joao/USP/InterSCity/vanet-emergency-system/examples/veins/ambulance-route-2.rou.xml"/>
     </netedit>
 
     <report>
