@@ -97,9 +97,9 @@ void HospitalAppl::setTraCI()
     veins::TraCIScenarioManager* manager = veins::TraCIScenarioManagerAccess().get();
     traci = manager->getCommandInterface();
     if(getParentModule()->getIndex() == 0)
-        traci->addVehicle("testvehicle", "emergency", "amu_route_1");
+        traci->addVehicle("testvehicle", "emergency", "hospital1");
     else
-        traci->addVehicle("testvehicle", "emergency", "amu_route_2");
+        traci->addVehicle("testvehicle", "emergency", "hospital2");
     traci->DEPART_POSITION_RANDOM;
     std::cout<<"Hospital sent out an ambulance to the accident location"<<endl;
 }

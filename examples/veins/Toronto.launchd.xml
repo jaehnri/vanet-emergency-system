@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+	<copy file="Toronto.net.xml"/>
+	<copy file="Toronto.rou.xml"/>
+	<copy file="Toronto.sumo.cfg" type="config"/>
+</launch>
